@@ -1,0 +1,20 @@
+# Original course materials are local inputs and are not redistributed.
+/communication/
+/script/
+/_extracted_text/
+
+# Local PDF tooling and generated test artifacts.
+/tools/poppler/
+/tools/*.zip
+/_edge_*/
+/_pdf_*/
+/_persist_*/
+/_persistence_test.html
+/_history_*/
+
+# OS/editor files.
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+

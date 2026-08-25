@@ -1,0 +1,1680 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JPNS1611 平假名字词与句子总表</title>
+  <style>
+    @page { size: A4; margin: 13mm 12mm 15mm; }
+    :root { --navy:#12365b; --blue:#236ba6; --pale:#eaf2f8; --gold:#e9ad29; --ink:#142335; --muted:#647184; --line:#d9e1e8; }
+    * { box-sizing: border-box; }
+    html { background:#dfe6ec; }
+    body { margin:0; color:var(--ink); background:white; font-family:"Segoe UI","Microsoft YaHei","Noto Sans CJK SC",sans-serif; }
+    .cover { min-height:268mm; padding:20mm 17mm; position:relative; overflow:hidden; page-break-after:always; background:linear-gradient(145deg,#f9f5e9 0 42%,#eef5fa 100%); }
+    .cover:before { content:""; position:absolute; width:150mm; height:150mm; border-radius:50%; right:-70mm; top:-70mm; background:rgba(35,107,166,.11); }
+    .cover:after { content:"あ"; position:absolute; right:13mm; bottom:-21mm; font:900 118mm/1 "Yu Mincho","Yu Gothic",sans-serif; color:rgba(18,54,91,.055); }
+    .course { color:var(--blue); font-size:10pt; font-weight:800; letter-spacing:.18em; text-transform:uppercase; }
+    .rule { width:22mm; height:2.2mm; margin:10mm 0 9mm; border-radius:3mm; background:var(--gold); }
+    h1 { margin:0; max-width:145mm; color:var(--navy); font-size:34pt; line-height:1.08; letter-spacing:.01em; }
+    .jp-title { margin:5mm 0 0; color:var(--blue); font:700 20pt/1.3 "Yu Mincho","Yu Gothic",sans-serif; letter-spacing:.09em; }
+    .intro { width:130mm; margin-top:13mm; color:var(--muted); font-size:11pt; line-height:1.85; }
+    .stats { display:grid; grid-template-columns:repeat(3,1fr); width:150mm; margin-top:17mm; border:1px solid rgba(18,54,91,.14); border-radius:5mm; overflow:hidden; background:rgba(255,255,255,.72); }
+    .stat { padding:7mm 6mm; border-right:1px solid rgba(18,54,91,.12); }
+    .stat:last-child { border-right:0; }
+    .stat strong { display:block; color:var(--navy); font-size:24pt; line-height:1; }
+    .stat span { display:block; margin-top:2mm; color:var(--muted); font-size:8.5pt; }
+    .guide { position:absolute; left:17mm; right:17mm; bottom:18mm; padding-top:6mm; border-top:1px solid rgba(18,54,91,.18); color:var(--muted); font-size:8.5pt; line-height:1.65; }
+    .guide b { color:var(--navy); }
+    .chapter { page-break-before:always; }
+    .chapter-head { display:grid; grid-template-columns:18mm 1fr 20mm; gap:5mm; align-items:center; min-height:25mm; margin-bottom:7mm; padding:5mm 6mm; border-radius:4mm; background:var(--navy); color:white; }
+    .chapter-no { color:var(--gold); font-size:22pt; font-weight:900; }
+    .chapter h2 { margin:0; font-size:19pt; line-height:1.15; }
+    .chapter-head p { margin:1.5mm 0 0; color:#d9e8f3; font-size:8.2pt; line-height:1.45; }
+    .chapter-count { text-align:right; font-size:21pt; font-weight:900; }
+    .chapter-count small { display:block; font-size:7pt; font-weight:600; color:#d9e8f3; }
+    .dialogue .chapter-head { background:#1a6075; }
+    .sentences .chapter-head { background:#704a68; }
+    .numbers .chapter-head { background:#61512b; }
+    .supplement .chapter-head { background:#44566c; }
+    .entries { columns:2; column-gap:8mm; column-rule:1px solid #e6ebef; }
+    .entry { position:relative; min-height:24mm; padding:3mm 2mm 3mm 9mm; border-bottom:1px solid var(--line); break-inside:avoid; page-break-inside:avoid; }
+    .index { position:absolute; left:0; top:4mm; color:#9aa6b4; font-size:7.5pt; font-variant-numeric:tabular-nums; }
+    .wordline { display:flex; align-items:baseline; gap:3mm; }
+    .kana { color:var(--navy); font:800 17pt/1.25 "Yu Mincho","Yu Gothic","Noto Sans JP",sans-serif; letter-spacing:.04em; }
+    .romaji { color:var(--blue); font-size:8.5pt; font-weight:700; }
+    .entry.long .wordline { display:block; }
+    .entry.long .kana { display:block; font-size:14pt; white-space:nowrap; letter-spacing:.01em; }
+    .entry.long .romaji { display:block; margin-top:.8mm; font-size:7.5pt; }
+    .sentences .entry { min-height:28mm; }
+    .sentences .entry .wordline { display:block; }
+    .sentences .entry .kana { display:block; font-size:12.5pt; white-space:normal; line-height:1.45; }
+    .sentences .entry .romaji { display:block; margin-top:.8mm; font-size:7.2pt; line-height:1.35; }
+    .meaning { margin-top:1mm; font-size:8.7pt; line-height:1.4; }
+    .source { margin-top:1mm; color:#8591a0; font-size:6.8pt; letter-spacing:.02em; }
+    @media screen {
+      body { width:210mm; margin:8mm auto; box-shadow:0 15px 50px rgba(20,35,53,.18); }
+      .chapter { padding:13mm 12mm 15mm; }
+    }
+    @media print {
+      html, body { background:white; }
+      .chapter { padding:0; }
+    }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <div class="course">JPNS1611 · JAPANESE 1 · WEEK 1–4</div>
+    <div class="rule"></div>
+    <h1>平假名字词与句子总表</h1>
+    <div class="jp-title">ひらがな・ことば・ぶん</div>
+    <p class="intro">根据当前文件夹中的 Week 1–4 Script 与 Communication tutorial slides 整理。按课程用途分为高频读写词、对话词汇、句子听写、数字表达及假名覆盖补充词，便于集中复习和查阅。</p>
+    <div class="stats">
+      <div class="stat"><strong>313</strong><span>学习条目</span></div>
+      <div class="stat"><strong>307</strong><span>不同平假名答案</span></div>
+      <div class="stat"><strong>46 / 46</strong><span>基础平假名覆盖</span></div>
+    </div>
+    <div class="guide"><b>阅读说明：</b>每个条目依次列出平假名、课程式罗马字、中文释义和 slides 来源。长音罗马字沿用课程常见写法，如 <i>oo / ee / uu</i>。片假名专用外来词没有强行改写成平假名。</div>
+  </section>
+  <section class="chapter core">
+    <header class="chapter-head">
+      <div class="chapter-no">01</div>
+      <div><h2>Script 高频词</h2><p>Slides 中明确出现的 Hiragana reading / writing practice 与复习词。建议优先掌握。</p></div>
+      <div class="chapter-count">93<small>条</small></div>
+    </header>
+    <div class="entries"><article class="entry">
+    <span class="index">01</span>
+    <div class="wordline"><span class="kana">あお</span><span class="romaji">ao</span></div>
+    <div class="meaning">蓝色；练读音</div>
+    <div class="source">W1 Script</div>
+  </article><article class="entry">
+    <span class="index">02</span>
+    <div class="wordline"><span class="kana">うえ</span><span class="romaji">ue</span></div>
+    <div class="meaning">上面</div>
+    <div class="source">W1/W2 Script</div>
+  </article><article class="entry">
+    <span class="index">03</span>
+    <div class="wordline"><span class="kana">あい</span><span class="romaji">ai</span></div>
+    <div class="meaning">爱；练读音</div>
+    <div class="source">W1 Script</div>
+  </article><article class="entry">
+    <span class="index">04</span>
+    <div class="wordline"><span class="kana">かき</span><span class="romaji">kaki</span></div>
+    <div class="meaning">柿子／牡蛎；练读音</div>
+    <div class="source">W1 Script</div>
+  </article><article class="entry">
+    <span class="index">05</span>
+    <div class="wordline"><span class="kana">こけ</span><span class="romaji">koke</span></div>
+    <div class="meaning">苔藓</div>
+    <div class="source">W1 Script</div>
+  </article><article class="entry">
+    <span class="index">06</span>
+    <div class="wordline"><span class="kana">かく</span><span class="romaji">kaku</span></div>
+    <div class="meaning">写</div>
+    <div class="source">W1/W2 Script</div>
+  </article><article class="entry">
+    <span class="index">07</span>
+    <div class="wordline"><span class="kana">えき</span><span class="romaji">eki</span></div>
+    <div class="meaning">车站</div>
+    <div class="source">W1 Script</div>
+  </article><article class="entry">
+    <span class="index">08</span>
+    <div class="wordline"><span class="kana">きあい</span><span class="romaji">kiai</span></div>
+    <div class="meaning">干劲；气势</div>
+    <div class="source">W1 Script</div>
+  </article><article class="entry">
+    <span class="index">09</span>
+    <div class="wordline"><span class="kana">すし</span><span class="romaji">sushi</span></div>
+    <div class="meaning">寿司</div>
+    <div class="source">W1 Script</div>
+  </article><article class="entry">
+    <span class="index">10</span>
+    <div class="wordline"><span class="kana">しそ</span><span class="romaji">shiso</span></div>
+    <div class="meaning">紫苏</div>
+    <div class="source">W1 Script</div>
+  </article><article class="entry">
+    <span class="index">11</span>
+    <div class="wordline"><span class="kana">さす</span><span class="romaji">sasu</span></div>
+    <div class="meaning">指／刺；练读音</div>
+    <div class="source">W1 Script</div>
+  </article><article class="entry">
+    <span class="index">12</span>
+    <div class="wordline"><span class="kana">せかい</span><span class="romaji">sekai</span></div>
+    <div class="meaning">世界</div>
+    <div class="source">W1 Script</div>
+  </article><article class="entry">
+    <span class="index">13</span>
+    <div class="wordline"><span class="kana">おかし</span><span class="romaji">okashi</span></div>
+    <div class="meaning">点心；零食</div>
+    <div class="source">W1 Script</div>
+  </article><article class="entry">
+    <span class="index">14</span>
+    <div class="wordline"><span class="kana">て</span><span class="romaji">te</span></div>
+    <div class="meaning">手</div>
+    <div class="source">W1 Script</div>
+  </article><article class="entry">
+    <span class="index">15</span>
+    <div class="wordline"><span class="kana">たつ</span><span class="romaji">tatsu</span></div>
+    <div class="meaning">站立</div>
+    <div class="source">W1 Script</div>
+  </article><article class="entry">
+    <span class="index">16</span>
+    <div class="wordline"><span class="kana">とち</span><span class="romaji">tochi</span></div>
+    <div class="meaning">土地</div>
+    <div class="source">W1/W2 Script</div>
+  </article><article class="entry">
+    <span class="index">17</span>
+    <div class="wordline"><span class="kana">たすけ</span><span class="romaji">tasuke</span></div>
+    <div class="meaning">帮助</div>
+    <div class="source">W1 Script</div>
+  </article><article class="entry">
+    <span class="index">18</span>
+    <div class="wordline"><span class="kana">ちしき</span><span class="romaji">chishiki</span></div>
+    <div class="meaning">知识</div>
+    <div class="source">W1 Script</div>
+  </article><article class="entry">
+    <span class="index">19</span>
+    <div class="wordline"><span class="kana">とめ</span><span class="romaji">tome</span></div>
+    <div class="meaning">停笔（笔画术语）</div>
+    <div class="source">W1/W2 Script</div>
+  </article><article class="entry">
+    <span class="index">20</span>
+    <div class="wordline"><span class="kana">はね</span><span class="romaji">hane</span></div>
+    <div class="meaning">钩（笔画术语）</div>
+    <div class="source">W1/W2 Script</div>
+  </article><article class="entry">
+    <span class="index">21</span>
+    <div class="wordline"><span class="kana">はらい</span><span class="romaji">harai</span></div>
+    <div class="meaning">扫／撇（笔画术语）</div>
+    <div class="source">W1/W2 Script</div>
+  </article><article class="entry">
+    <span class="index">22</span>
+    <div class="wordline"><span class="kana">こい</span><span class="romaji">koi</span></div>
+    <div class="meaning">恋爱／鲤鱼；练读音</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">23</span>
+    <div class="wordline"><span class="kana">おか</span><span class="romaji">oka</span></div>
+    <div class="meaning">山冈</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">24</span>
+    <div class="wordline"><span class="kana">いけ</span><span class="romaji">ike</span></div>
+    <div class="meaning">池塘</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">25</span>
+    <div class="wordline"><span class="kana">あき</span><span class="romaji">aki</span></div>
+    <div class="meaning">秋天</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">26</span>
+    <div class="wordline"><span class="kana">そと</span><span class="romaji">soto</span></div>
+    <div class="meaning">外面</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">27</span>
+    <div class="wordline"><span class="kana">かたて</span><span class="romaji">katate</span></div>
+    <div class="meaning">单手</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">28</span>
+    <div class="wordline"><span class="kana">きせつ</span><span class="romaji">kisetsu</span></div>
+    <div class="meaning">季节</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">29</span>
+    <div class="wordline"><span class="kana">はい</span><span class="romaji">hai</span></div>
+    <div class="meaning">是；好的</div>
+    <div class="source">W2/W3 Script</div>
+  </article><article class="entry">
+    <span class="index">30</span>
+    <div class="wordline"><span class="kana">いま</span><span class="romaji">ima</span></div>
+    <div class="meaning">现在</div>
+    <div class="source">W2/W3 Script</div>
+  </article><article class="entry">
+    <span class="index">31</span>
+    <div class="wordline"><span class="kana">にほん</span><span class="romaji">nihon</span></div>
+    <div class="meaning">日本</div>
+    <div class="source">W2/W3 Script</div>
+  </article><article class="entry">
+    <span class="index">32</span>
+    <div class="wordline"><span class="kana">わたし</span><span class="romaji">watashi</span></div>
+    <div class="meaning">我</div>
+    <div class="source">W2/W3 Script</div>
+  </article><article class="entry">
+    <span class="index">33</span>
+    <div class="wordline"><span class="kana">なまえ</span><span class="romaji">namae</span></div>
+    <div class="meaning">名字</div>
+    <div class="source">W2/W3 Script</div>
+  </article><article class="entry">
+    <span class="index">34</span>
+    <div class="wordline"><span class="kana">れきし</span><span class="romaji">rekishi</span></div>
+    <div class="meaning">历史</div>
+    <div class="source">W2/W3 Script</div>
+  </article><article class="entry">
+    <span class="index">35</span>
+    <div class="wordline"><span class="kana">ふとん</span><span class="romaji">futon</span></div>
+    <div class="meaning">日式被褥</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">36</span>
+    <div class="wordline"><span class="kana">きもの</span><span class="romaji">kimono</span></div>
+    <div class="meaning">和服</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">37</span>
+    <div class="wordline"><span class="kana">さしみ</span><span class="romaji">sashimi</span></div>
+    <div class="meaning">刺身</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">38</span>
+    <div class="wordline"><span class="kana">てりやき</span><span class="romaji">teriyaki</span></div>
+    <div class="meaning">照烧</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">39</span>
+    <div class="wordline"><span class="kana">ごご</span><span class="romaji">gogo</span></div>
+    <div class="meaning">下午；PM</div>
+    <div class="source">W2/W3 Script</div>
+  </article><article class="entry">
+    <span class="index">40</span>
+    <div class="wordline"><span class="kana">しごと</span><span class="romaji">shigoto</span></div>
+    <div class="meaning">工作</div>
+    <div class="source">W2/W3 Script</div>
+  </article><article class="entry">
+    <span class="index">41</span>
+    <div class="wordline"><span class="kana">ごぜん</span><span class="romaji">gozen</span></div>
+    <div class="meaning">上午；AM</div>
+    <div class="source">W2/W3 Script</div>
+  </article><article class="entry">
+    <span class="index">42</span>
+    <div class="wordline"><span class="kana">にほんご</span><span class="romaji">nihongo</span></div>
+    <div class="meaning">日语</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">43</span>
+    <div class="wordline"><span class="kana">にじ</span><span class="romaji">niji</span></div>
+    <div class="meaning">两点／彩虹（同音）</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">44</span>
+    <div class="wordline"><span class="kana">でんわ</span><span class="romaji">denwa</span></div>
+    <div class="meaning">电话</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">45</span>
+    <div class="wordline"><span class="kana">だいがく</span><span class="romaji">daigaku</span></div>
+    <div class="meaning">大学</div>
+    <div class="source">W2/W3 Script</div>
+  </article><article class="entry">
+    <span class="index">46</span>
+    <div class="wordline"><span class="kana">ともだち</span><span class="romaji">tomodachi</span></div>
+    <div class="meaning">朋友</div>
+    <div class="source">W2/W3 Script</div>
+  </article><article class="entry">
+    <span class="index">47</span>
+    <div class="wordline"><span class="kana">べんごし</span><span class="romaji">bengoshi</span></div>
+    <div class="meaning">律师</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">48</span>
+    <div class="wordline"><span class="kana">かんごし</span><span class="romaji">kangoshi</span></div>
+    <div class="meaning">护士</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">49</span>
+    <div class="wordline"><span class="kana">いしや</span><span class="romaji">ishiya</span></div>
+    <div class="meaning">石材店／石匠；发音对比</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">50</span>
+    <div class="wordline"><span class="kana">いしゃ</span><span class="romaji">isha</span></div>
+    <div class="meaning">医生</div>
+    <div class="source">W3/W4 Script</div>
+  </article><article class="entry">
+    <span class="index">51</span>
+    <div class="wordline"><span class="kana">しゅふ</span><span class="romaji">shufu</span></div>
+    <div class="meaning">主妇／家庭主理人</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">52</span>
+    <div class="wordline"><span class="kana">としょかん</span><span class="romaji">toshokan</span></div>
+    <div class="meaning">图书馆</div>
+    <div class="source">W3/W4 Script</div>
+  </article><article class="entry">
+    <span class="index">53</span>
+    <div class="wordline"><span class="kana">おちゃ</span><span class="romaji">ocha</span></div>
+    <div class="meaning">茶</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">54</span>
+    <div class="wordline"><span class="kana">ゆうびんきょく</span><span class="romaji">yuubinkyoku</span></div>
+    <div class="meaning">邮局</div>
+    <div class="source">W3/W4 Script</div>
+  </article><article class="entry">
+    <span class="index">55</span>
+    <div class="wordline"><span class="kana">いち</span><span class="romaji">ichi</span></div>
+    <div class="meaning">一；发音对比</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">56</span>
+    <div class="wordline"><span class="kana">いっち</span><span class="romaji">icchi</span></div>
+    <div class="meaning">一致；发音对比</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">57</span>
+    <div class="wordline"><span class="kana">おと</span><span class="romaji">oto</span></div>
+    <div class="meaning">声音</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">58</span>
+    <div class="wordline"><span class="kana">おっと</span><span class="romaji">otto</span></div>
+    <div class="meaning">丈夫；发音对比</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">59</span>
+    <div class="wordline"><span class="kana">はっせん</span><span class="romaji">hassen</span></div>
+    <div class="meaning">八千</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">60</span>
+    <div class="wordline"><span class="kana">ろっぴゃく</span><span class="romaji">roppyaku</span></div>
+    <div class="meaning">六百</div>
+    <div class="source">W3/W4 Script</div>
+  </article><article class="entry">
+    <span class="index">61</span>
+    <div class="wordline"><span class="kana">おかあさん</span><span class="romaji">okaasan</span></div>
+    <div class="meaning">母亲（别人的／称呼）</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">62</span>
+    <div class="wordline"><span class="kana">おねえさん</span><span class="romaji">oneesan</span></div>
+    <div class="meaning">姐姐（别人的／称呼）</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">63</span>
+    <div class="wordline"><span class="kana">ちゅうごく</span><span class="romaji">chuugoku</span></div>
+    <div class="meaning">中国</div>
+    <div class="source">W3/W4 Script</div>
+  </article><article class="entry">
+    <span class="index">64</span>
+    <div class="wordline"><span class="kana">おにいさん</span><span class="romaji">oniisan</span></div>
+    <div class="meaning">哥哥（别人的／称呼）</div>
+    <div class="source">W3/W4 Script</div>
+  </article><article class="entry">
+    <span class="index">65</span>
+    <div class="wordline"><span class="kana">おいしい</span><span class="romaji">oishii</span></div>
+    <div class="meaning">好吃</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">66</span>
+    <div class="wordline"><span class="kana">おはよう</span><span class="romaji">ohayoo</span></div>
+    <div class="meaning">早上好</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">67</span>
+    <div class="wordline"><span class="kana">おおきい</span><span class="romaji">ookii</span></div>
+    <div class="meaning">大的</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">68</span>
+    <div class="wordline"><span class="kana">せいじ</span><span class="romaji">seeji</span></div>
+    <div class="meaning">政治</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">69</span>
+    <div class="wordline"><span class="kana">えいご</span><span class="romaji">eego</span></div>
+    <div class="meaning">英语</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">70</span>
+    <div class="wordline"><span class="kana">こうこう</span><span class="romaji">kookoo</span></div>
+    <div class="meaning">高中</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">71</span>
+    <div class="wordline"><span class="kana">せんせい</span><span class="romaji">sensee</span></div>
+    <div class="meaning">老师</div>
+    <div class="source">W3/W4 Script</div>
+  </article><article class="entry">
+    <span class="index">72</span>
+    <div class="wordline"><span class="kana">せんこう</span><span class="romaji">senkoo</span></div>
+    <div class="meaning">专业</div>
+    <div class="source">W3/W4 Script</div>
+  </article><article class="entry">
+    <span class="index">73</span>
+    <div class="wordline"><span class="kana">がくせい</span><span class="romaji">gakusee</span></div>
+    <div class="meaning">学生</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">74</span>
+    <div class="wordline"><span class="kana">おとうと</span><span class="romaji">otooto</span></div>
+    <div class="meaning">弟弟</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">75</span>
+    <div class="wordline"><span class="kana">がっこう</span><span class="romaji">gakkoo</span></div>
+    <div class="meaning">学校</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">76</span>
+    <div class="wordline"><span class="kana">かいしゃいん</span><span class="romaji">kaishain</span></div>
+    <div class="meaning">公司职员</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">77</span>
+    <div class="wordline"><span class="kana">りゅうがくせい</span><span class="romaji">ryuugakusee</span></div>
+    <div class="meaning">留学生</div>
+    <div class="source">W3/W4 Script</div>
+  </article><article class="entry">
+    <span class="index">78</span>
+    <div class="wordline"><span class="kana">ここ</span><span class="romaji">koko</span></div>
+    <div class="meaning">这里</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">79</span>
+    <div class="wordline"><span class="kana">おばさん</span><span class="romaji">obasan</span></div>
+    <div class="meaning">阿姨；中年女士</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">80</span>
+    <div class="wordline"><span class="kana">おばあさん</span><span class="romaji">obaasan</span></div>
+    <div class="meaning">祖母；老奶奶</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">81</span>
+    <div class="wordline"><span class="kana">さか</span><span class="romaji">saka</span></div>
+    <div class="meaning">坡</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">82</span>
+    <div class="wordline"><span class="kana">さっか</span><span class="romaji">sakka</span></div>
+    <div class="meaning">作家</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">83</span>
+    <div class="wordline"><span class="kana">しじん</span><span class="romaji">shijin</span></div>
+    <div class="meaning">诗人</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">84</span>
+    <div class="wordline"><span class="kana">しゅじん</span><span class="romaji">shujin</span></div>
+    <div class="meaning">丈夫</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">85</span>
+    <div class="wordline"><span class="kana">しゅうじん</span><span class="romaji">shuujin</span></div>
+    <div class="meaning">囚犯</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">86</span>
+    <div class="wordline"><span class="kana">ひゃく</span><span class="romaji">hyaku</span></div>
+    <div class="meaning">一百</div>
+    <div class="source">W3/W4 Script</div>
+  </article><article class="entry">
+    <span class="index">87</span>
+    <div class="wordline"><span class="kana">じてんしゃ</span><span class="romaji">jitensha</span></div>
+    <div class="meaning">自行车</div>
+    <div class="source">W3/W4 Script</div>
+  </article><article class="entry">
+    <span class="index">88</span>
+    <div class="wordline"><span class="kana">とけい</span><span class="romaji">tokee</span></div>
+    <div class="meaning">钟表；手表</div>
+    <div class="source">W3/W4 Script</div>
+  </article><article class="entry">
+    <span class="index">89</span>
+    <div class="wordline"><span class="kana">おとうさん</span><span class="romaji">otoosan</span></div>
+    <div class="meaning">父亲（别人的／称呼）</div>
+    <div class="source">W3/W4 Script</div>
+  </article><article class="entry">
+    <span class="index">90</span>
+    <div class="wordline"><span class="kana">どうぞ</span><span class="romaji">doozo</span></div>
+    <div class="meaning">请；给你</div>
+    <div class="source">W3/W4 Script</div>
+  </article><article class="entry">
+    <span class="index">91</span>
+    <div class="wordline"><span class="kana">ぼうし</span><span class="romaji">booshi</span></div>
+    <div class="meaning">帽子</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">92</span>
+    <div class="wordline"><span class="kana">さんびゃく</span><span class="romaji">sanbyaku</span></div>
+    <div class="meaning">三百</div>
+    <div class="source">W3/W4 Script</div>
+  </article><article class="entry">
+    <span class="index">93</span>
+    <div class="wordline"><span class="kana">げんき</span><span class="romaji">genki</span></div>
+    <div class="meaning">有精神；《Genki》教材名</div>
+    <div class="source">W3/W4 Script title</div>
+  </article></div>
+  </section><section class="chapter dialogue">
+    <header class="chapter-head">
+      <div class="chapter-no">02</div>
+      <div><h2>对话与课内词汇</h2><p>Communication slides、Lesson 1–2 对话、购物及点餐表达。</p></div>
+      <div class="chapter-count">71<small>条</small></div>
+    </header>
+    <div class="entries"><article class="entry long">
+    <span class="index">01</span>
+    <div class="wordline"><span class="kana">おはようございます</span><span class="romaji">ohayoo gozaimasu</span></div>
+    <div class="meaning">早上好（礼貌）</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">02</span>
+    <div class="wordline"><span class="kana">こんにちは</span><span class="romaji">konnichiwa</span></div>
+    <div class="meaning">你好；下午好</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">03</span>
+    <div class="wordline"><span class="kana">こんばんは</span><span class="romaji">konbanwa</span></div>
+    <div class="meaning">晚上好</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry long">
+    <span class="index">04</span>
+    <div class="wordline"><span class="kana">ありがとうございます</span><span class="romaji">arigatoo gozaimasu</span></div>
+    <div class="meaning">非常感谢</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">05</span>
+    <div class="wordline"><span class="kana">いいえ</span><span class="romaji">iie</span></div>
+    <div class="meaning">不；不用谢</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">06</span>
+    <div class="wordline"><span class="kana">すみません</span><span class="romaji">sumimasen</span></div>
+    <div class="meaning">不好意思；劳驾</div>
+    <div class="source">W1/W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">07</span>
+    <div class="wordline"><span class="kana">おやすみなさい</span><span class="romaji">oyasuminasai</span></div>
+    <div class="meaning">晚安</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">08</span>
+    <div class="wordline"><span class="kana">はじめまして</span><span class="romaji">hajimemashite</span></div>
+    <div class="meaning">初次见面</div>
+    <div class="source">W1/W2 Communication</div>
+  </article><article class="entry long">
+    <span class="index">09</span>
+    <div class="wordline"><span class="kana">よろしくおねがいします</span><span class="romaji">yoroshiku onegaishimasu</span></div>
+    <div class="meaning">请多关照</div>
+    <div class="source">W1/W2 Communication</div>
+  </article><article class="entry">
+    <span class="index">10</span>
+    <div class="wordline"><span class="kana">でんわばんごう</span><span class="romaji">denwa bangoo</span></div>
+    <div class="meaning">电话号码</div>
+    <div class="source">W1/W2 Communication</div>
+  </article><article class="entry">
+    <span class="index">11</span>
+    <div class="wordline"><span class="kana">なんばん</span><span class="romaji">nanban</span></div>
+    <div class="meaning">几号；什么号码</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">12</span>
+    <div class="wordline"><span class="kana">じ</span><span class="romaji">ji</span></div>
+    <div class="meaning">点钟（时间后缀）</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">13</span>
+    <div class="wordline"><span class="kana">はん</span><span class="romaji">han</span></div>
+    <div class="meaning">半；半点</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">14</span>
+    <div class="wordline"><span class="kana">なんじ</span><span class="romaji">nanji</span></div>
+    <div class="meaning">几点</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">15</span>
+    <div class="wordline"><span class="kana">さい</span><span class="romaji">sai</span></div>
+    <div class="meaning">岁（年龄后缀）</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">16</span>
+    <div class="wordline"><span class="kana">なんさい</span><span class="romaji">nansai</span></div>
+    <div class="meaning">几岁</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">17</span>
+    <div class="wordline"><span class="kana">はたち</span><span class="romaji">hatachi</span></div>
+    <div class="meaning">二十岁</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">18</span>
+    <div class="wordline"><span class="kana">だいがくせい</span><span class="romaji">daigakusee</span></div>
+    <div class="meaning">大学生</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry">
+    <span class="index">19</span>
+    <div class="wordline"><span class="kana">だいがくいんせい</span><span class="romaji">daigakuinsee</span></div>
+    <div class="meaning">研究生</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry">
+    <span class="index">20</span>
+    <div class="wordline"><span class="kana">そうです</span><span class="romaji">soo desu</span></div>
+    <div class="meaning">是的；对的</div>
+    <div class="source">W2/W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">21</span>
+    <div class="wordline"><span class="kana">そうですか</span><span class="romaji">soo desu ka</span></div>
+    <div class="meaning">是吗；原来如此</div>
+    <div class="source">W2/W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">22</span>
+    <div class="wordline"><span class="kana">なんねんせい</span><span class="romaji">nannensee</span></div>
+    <div class="meaning">几年级学生</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry">
+    <span class="index">23</span>
+    <div class="wordline"><span class="kana">にねんせい</span><span class="romaji">ninensee</span></div>
+    <div class="meaning">二年级学生</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry">
+    <span class="index">24</span>
+    <div class="wordline"><span class="kana">さんねんせい</span><span class="romaji">sannensee</span></div>
+    <div class="meaning">三年级学生</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry">
+    <span class="index">25</span>
+    <div class="wordline"><span class="kana">よねんせい</span><span class="romaji">yonensee</span></div>
+    <div class="meaning">四年级学生</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry">
+    <span class="index">26</span>
+    <div class="wordline"><span class="kana">けいざい</span><span class="romaji">keezai</span></div>
+    <div class="meaning">经济（学）</div>
+    <div class="source">W2/W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">27</span>
+    <div class="wordline"><span class="kana">あの</span><span class="romaji">ano</span></div>
+    <div class="meaning">那个；嗯／打扰一下</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry">
+    <span class="index">28</span>
+    <div class="wordline"><span class="kana">かいもの</span><span class="romaji">kaimono</span></div>
+    <div class="meaning">购物</div>
+    <div class="source">W3/W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">29</span>
+    <div class="wordline"><span class="kana">いくら</span><span class="romaji">ikura</span></div>
+    <div class="meaning">多少钱</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry">
+    <span class="index">30</span>
+    <div class="wordline"><span class="kana">えん</span><span class="romaji">en</span></div>
+    <div class="meaning">日元</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry">
+    <span class="index">31</span>
+    <div class="wordline"><span class="kana">これ</span><span class="romaji">kore</span></div>
+    <div class="meaning">这个</div>
+    <div class="source">W3/W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">32</span>
+    <div class="wordline"><span class="kana">それ</span><span class="romaji">sore</span></div>
+    <div class="meaning">那个（靠近听者）</div>
+    <div class="source">W3/W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">33</span>
+    <div class="wordline"><span class="kana">あれ</span><span class="romaji">are</span></div>
+    <div class="meaning">那个（离双方都远）</div>
+    <div class="source">W3/W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">34</span>
+    <div class="wordline"><span class="kana">どれ</span><span class="romaji">dore</span></div>
+    <div class="meaning">哪一个</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry">
+    <span class="index">35</span>
+    <div class="wordline"><span class="kana">この</span><span class="romaji">kono</span></div>
+    <div class="meaning">这个……</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry">
+    <span class="index">36</span>
+    <div class="wordline"><span class="kana">その</span><span class="romaji">sono</span></div>
+    <div class="meaning">那个……（靠近听者）</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry">
+    <span class="index">37</span>
+    <div class="wordline"><span class="kana">どの</span><span class="romaji">dono</span></div>
+    <div class="meaning">哪个……</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry">
+    <span class="index">38</span>
+    <div class="wordline"><span class="kana">そこ</span><span class="romaji">soko</span></div>
+    <div class="meaning">那里（靠近听者）</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry">
+    <span class="index">39</span>
+    <div class="wordline"><span class="kana">あそこ</span><span class="romaji">asoko</span></div>
+    <div class="meaning">那里（离双方都远）</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry">
+    <span class="index">40</span>
+    <div class="wordline"><span class="kana">どこ</span><span class="romaji">doko</span></div>
+    <div class="meaning">哪里</div>
+    <div class="source">W3/W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">41</span>
+    <div class="wordline"><span class="kana">どこの</span><span class="romaji">doko no</span></div>
+    <div class="meaning">哪里的……</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry">
+    <span class="index">42</span>
+    <div class="wordline"><span class="kana">だれ</span><span class="romaji">dare</span></div>
+    <div class="meaning">谁</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry">
+    <span class="index">43</span>
+    <div class="wordline"><span class="kana">ぎんこう</span><span class="romaji">ginkoo</span></div>
+    <div class="meaning">银行</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">44</span>
+    <div class="wordline"><span class="kana">かさ</span><span class="romaji">kasa</span></div>
+    <div class="meaning">伞</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">45</span>
+    <div class="wordline"><span class="kana">ほん</span><span class="romaji">hon</span></div>
+    <div class="meaning">书</div>
+    <div class="source">W3/W4 Script</div>
+  </article><article class="entry">
+    <span class="index">46</span>
+    <div class="wordline"><span class="kana">さかな</span><span class="romaji">sakana</span></div>
+    <div class="meaning">鱼</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">47</span>
+    <div class="wordline"><span class="kana">にく</span><span class="romaji">niku</span></div>
+    <div class="meaning">肉</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">48</span>
+    <div class="wordline"><span class="kana">やさい</span><span class="romaji">yasai</span></div>
+    <div class="meaning">蔬菜</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">49</span>
+    <div class="wordline"><span class="kana">しんぶん</span><span class="romaji">shinbun</span></div>
+    <div class="meaning">报纸</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">50</span>
+    <div class="wordline"><span class="kana">ちゅうごくご</span><span class="romaji">chuugokugo</span></div>
+    <div class="meaning">中文；汉语</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">51</span>
+    <div class="wordline"><span class="kana">はさみ</span><span class="romaji">hasami</span></div>
+    <div class="meaning">剪刀</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">52</span>
+    <div class="wordline"><span class="kana">とんかつ</span><span class="romaji">tonkatsu</span></div>
+    <div class="meaning">炸猪排</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">53</span>
+    <div class="wordline"><span class="kana">おすし</span><span class="romaji">osushi</span></div>
+    <div class="meaning">寿司（礼貌说法）</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">54</span>
+    <div class="wordline"><span class="kana">たこやき</span><span class="romaji">takoyaki</span></div>
+    <div class="meaning">章鱼烧</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">55</span>
+    <div class="wordline"><span class="kana">なっとう</span><span class="romaji">nattoo</span></div>
+    <div class="meaning">纳豆</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">56</span>
+    <div class="wordline"><span class="kana">じゃないです</span><span class="romaji">janai desu</span></div>
+    <div class="meaning">不是……</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">57</span>
+    <div class="wordline"><span class="kana">じゃありません</span><span class="romaji">ja arimasen</span></div>
+    <div class="meaning">不是……（礼貌）</div>
+    <div class="source">W4 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">58</span>
+    <div class="wordline"><span class="kana">ではありません</span><span class="romaji">dewa arimasen</span></div>
+    <div class="meaning">不是……（较正式）</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry">
+    <span class="index">59</span>
+    <div class="wordline"><span class="kana">あのう</span><span class="romaji">anoo</span></div>
+    <div class="meaning">嗯；打扰一下</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">60</span>
+    <div class="wordline"><span class="kana">ああ</span><span class="romaji">aa</span></div>
+    <div class="meaning">啊；原来如此</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">61</span>
+    <div class="wordline"><span class="kana">じゃあ</span><span class="romaji">jaa</span></div>
+    <div class="meaning">那么；那就</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">62</span>
+    <div class="wordline"><span class="kana">おねがいします</span><span class="romaji">onegaishimasu</span></div>
+    <div class="meaning">拜托了；请给我</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry long">
+    <span class="index">63</span>
+    <div class="wordline"><span class="kana">これをおねがいします</span><span class="romaji">kore o onegaishimasu</span></div>
+    <div class="meaning">请给我这个</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">64</span>
+    <div class="wordline"><span class="kana">これをください</span><span class="romaji">kore o kudasai</span></div>
+    <div class="meaning">请给我这个</div>
+    <div class="source">W3/W4 Dialogue audio</div>
+  </article><article class="entry">
+    <span class="index">65</span>
+    <div class="wordline"><span class="kana">ください</span><span class="romaji">kudasai</span></div>
+    <div class="meaning">请给我……</div>
+    <div class="source">W3/W4 Dialogue audio</div>
+  </article><article class="entry">
+    <span class="index">66</span>
+    <div class="wordline"><span class="kana">ちょっと</span><span class="romaji">chotto</span></div>
+    <div class="meaning">有点；稍微</div>
+    <div class="source">W3 Dialogue audio</div>
+  </article><article class="entry">
+    <span class="index">67</span>
+    <div class="wordline"><span class="kana">ていしょく</span><span class="romaji">teeshoku</span></div>
+    <div class="meaning">套餐；定食</div>
+    <div class="source">W4 Communication menu</div>
+  </article><article class="entry">
+    <span class="index">68</span>
+    <div class="wordline"><span class="kana">そば</span><span class="romaji">soba</span></div>
+    <div class="meaning">荞麦面</div>
+    <div class="source">W4 Communication menu</div>
+  </article><article class="entry">
+    <span class="index">69</span>
+    <div class="wordline"><span class="kana">うどん</span><span class="romaji">udon</span></div>
+    <div class="meaning">乌冬面</div>
+    <div class="source">W4 Communication menu</div>
+  </article><article class="entry">
+    <span class="index">70</span>
+    <div class="wordline"><span class="kana">こうちゃ</span><span class="romaji">koocha</span></div>
+    <div class="meaning">红茶</div>
+    <div class="source">W4 Communication menu</div>
+  </article><article class="entry">
+    <span class="index">71</span>
+    <div class="wordline"><span class="kana">とうきょう</span><span class="romaji">tookyoo</span></div>
+    <div class="meaning">东京</div>
+    <div class="source">W4 Script</div>
+  </article></div>
+  </section><section class="chapter sentences">
+    <header class="chapter-head">
+      <div class="chapter-no">03</div>
+      <div><h2>句子听写</h2><p>从问候、自我介绍、时间、购物与点餐对话中整理的完整句型。</p></div>
+      <div class="chapter-count">76<small>条</small></div>
+    </header>
+    <div class="entries"><article class="entry long">
+    <span class="index">01</span>
+    <div class="wordline"><span class="kana">おはようございます。</span><span class="romaji">ohayoo gozaimasu</span></div>
+    <div class="meaning">早上好（礼貌）</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">02</span>
+    <div class="wordline"><span class="kana">こんにちは。</span><span class="romaji">konnichiwa</span></div>
+    <div class="meaning">你好；下午好</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">03</span>
+    <div class="wordline"><span class="kana">こんばんは。</span><span class="romaji">konbanwa</span></div>
+    <div class="meaning">晚上好</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry long">
+    <span class="index">04</span>
+    <div class="wordline"><span class="kana">ありがとうございます。</span><span class="romaji">arigatoo gozaimasu</span></div>
+    <div class="meaning">非常感谢</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">05</span>
+    <div class="wordline"><span class="kana">はじめまして。</span><span class="romaji">hajimemashite</span></div>
+    <div class="meaning">初次见面</div>
+    <div class="source">W1/W2 Communication</div>
+  </article><article class="entry long">
+    <span class="index">06</span>
+    <div class="wordline"><span class="kana">よろしくおねがいします。</span><span class="romaji">yoroshiku onegaishimasu</span></div>
+    <div class="meaning">请多关照</div>
+    <div class="source">W1/W2 Communication</div>
+  </article><article class="entry long">
+    <span class="index">07</span>
+    <div class="wordline"><span class="kana">でんわばんごうはなんばんですか。</span><span class="romaji">denwa bangoo wa nanban desu ka</span></div>
+    <div class="meaning">电话号码是多少？</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry long">
+    <span class="index">08</span>
+    <div class="wordline"><span class="kana">いま、なんじですか。</span><span class="romaji">ima, nanji desu ka</span></div>
+    <div class="meaning">现在几点？</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">09</span>
+    <div class="wordline"><span class="kana">さんじです。</span><span class="romaji">sanji desu</span></div>
+    <div class="meaning">三点。</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">10</span>
+    <div class="wordline"><span class="kana">なんさいですか。</span><span class="romaji">nansai desu ka</span></div>
+    <div class="meaning">几岁？</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry long">
+    <span class="index">11</span>
+    <div class="wordline"><span class="kana">わたしはがくせいです。</span><span class="romaji">watashi wa gakusee desu</span></div>
+    <div class="meaning">我是学生。</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">12</span>
+    <div class="wordline"><span class="kana">にほんごですか。</span><span class="romaji">nihongo desu ka</span></div>
+    <div class="meaning">是日语吗？</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry long">
+    <span class="index">13</span>
+    <div class="wordline"><span class="kana">ともだちのでんわです。</span><span class="romaji">tomodachi no denwa desu</span></div>
+    <div class="meaning">是朋友的电话。</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry long">
+    <span class="index">14</span>
+    <div class="wordline"><span class="kana">きむらたけしです。</span><span class="romaji">kimura takeshi desu</span></div>
+    <div class="meaning">我是木村武。</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">15</span>
+    <div class="wordline"><span class="kana">にほんじんです。</span><span class="romaji">nihonjin desu</span></div>
+    <div class="meaning">是日本人。</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry long">
+    <span class="index">16</span>
+    <div class="wordline"><span class="kana">にほんじんですか。</span><span class="romaji">nihonjin desu ka</span></div>
+    <div class="meaning">是日本人吗？</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry long">
+    <span class="index">17</span>
+    <div class="wordline"><span class="kana">はい、にほんじんです。</span><span class="romaji">hai, nihonjin desu</span></div>
+    <div class="meaning">是的，是日本人。</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">18</span>
+    <div class="wordline"><span class="kana">ごごよじです。</span><span class="romaji">gogo yoji desu</span></div>
+    <div class="meaning">下午四点。</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry long">
+    <span class="index">19</span>
+    <div class="wordline"><span class="kana">たけしさんはがくせいですか。</span><span class="romaji">takeshi san wa gakusee desu ka</span></div>
+    <div class="meaning">武是学生吗？</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry">
+    <span class="index">20</span>
+    <div class="wordline"><span class="kana">はい、そうです。</span><span class="romaji">hai, soo desu</span></div>
+    <div class="meaning">是的，没错。</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry long">
+    <span class="index">21</span>
+    <div class="wordline"><span class="kana">いいえ、がくせいです。</span><span class="romaji">iie, gakusee desu</span></div>
+    <div class="meaning">不，是学生。</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry long">
+    <span class="index">22</span>
+    <div class="wordline"><span class="kana">たけしさんはなんねんせいですか。</span><span class="romaji">takeshi san wa nannensee desu ka</span></div>
+    <div class="meaning">武是几年级学生？</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry">
+    <span class="index">23</span>
+    <div class="wordline"><span class="kana">よねんせいです。</span><span class="romaji">yonensee desu</span></div>
+    <div class="meaning">是四年级学生。</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry long">
+    <span class="index">24</span>
+    <div class="wordline"><span class="kana">せんこうはなんですか。</span><span class="romaji">senkoo wa nan desu ka</span></div>
+    <div class="meaning">你的专业是什么？</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry">
+    <span class="index">25</span>
+    <div class="wordline"><span class="kana">れきしです。</span><span class="romaji">rekishi desu</span></div>
+    <div class="meaning">是历史。</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry long">
+    <span class="index">26</span>
+    <div class="wordline"><span class="kana">わたしはさんねんせいです。</span><span class="romaji">watashi wa sannensee desu</span></div>
+    <div class="meaning">我是三年级学生。</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry long">
+    <span class="index">27</span>
+    <div class="wordline"><span class="kana">そうですか。せんこうはなんですか。</span><span class="romaji">soo desu ka. senkoo wa nan desu ka</span></div>
+    <div class="meaning">是吗？你的专业是什么？</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry">
+    <span class="index">28</span>
+    <div class="wordline"><span class="kana">けいざいです。</span><span class="romaji">keezai desu</span></div>
+    <div class="meaning">是经济学。</div>
+    <div class="source">W2 Communication</div>
+  </article><article class="entry">
+    <span class="index">29</span>
+    <div class="wordline"><span class="kana">がくせいですか。</span><span class="romaji">gakusee desu ka</span></div>
+    <div class="meaning">是学生吗？</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry long">
+    <span class="index">30</span>
+    <div class="wordline"><span class="kana">これはいくらですか。</span><span class="romaji">kore wa ikura desu ka</span></div>
+    <div class="meaning">这个多少钱？</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry long">
+    <span class="index">31</span>
+    <div class="wordline"><span class="kana">このとけいはいくらですか。</span><span class="romaji">kono tokee wa ikura desu ka</span></div>
+    <div class="meaning">这块表多少钱？</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry long">
+    <span class="index">32</span>
+    <div class="wordline"><span class="kana">どのとけいですか。</span><span class="romaji">dono tokee desu ka</span></div>
+    <div class="meaning">是哪块表？</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry long">
+    <span class="index">33</span>
+    <div class="wordline"><span class="kana">ぎんこうはどこですか。</span><span class="romaji">ginkoo wa doko desu ka</span></div>
+    <div class="meaning">银行在哪里？</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry">
+    <span class="index">34</span>
+    <div class="wordline"><span class="kana">あそこです。</span><span class="romaji">asoko desu</span></div>
+    <div class="meaning">在那里。</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry long">
+    <span class="index">35</span>
+    <div class="wordline"><span class="kana">だれのかさですか。</span><span class="romaji">dare no kasa desu ka</span></div>
+    <div class="meaning">是谁的伞？</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry long">
+    <span class="index">36</span>
+    <div class="wordline"><span class="kana">たけしさんのかさです。</span><span class="romaji">takeshi san no kasa desu</span></div>
+    <div class="meaning">是武的伞。</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry long">
+    <span class="index">37</span>
+    <div class="wordline"><span class="kana">としょかんはどこですか。</span><span class="romaji">toshokan wa doko desu ka</span></div>
+    <div class="meaning">图书馆在哪里？</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry long">
+    <span class="index">38</span>
+    <div class="wordline"><span class="kana">このかさはいくらですか。</span><span class="romaji">kono kasa wa ikura desu ka</span></div>
+    <div class="meaning">这把伞多少钱？</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry long">
+    <span class="index">39</span>
+    <div class="wordline"><span class="kana">これはだれのほんですか。</span><span class="romaji">kore wa dare no hon desu ka</span></div>
+    <div class="meaning">这是谁的书？</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry long">
+    <span class="index">40</span>
+    <div class="wordline"><span class="kana">それはせんせいのほんですよ。</span><span class="romaji">sore wa sensee no hon desu yo</span></div>
+    <div class="meaning">那是老师的书。</div>
+    <div class="source">W3 Script</div>
+  </article><article class="entry long">
+    <span class="index">41</span>
+    <div class="wordline"><span class="kana">とけいはいくらですか。</span><span class="romaji">tokee wa ikura desu ka</span></div>
+    <div class="meaning">手表多少钱？</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry long">
+    <span class="index">42</span>
+    <div class="wordline"><span class="kana">はっぴゃくえんです。</span><span class="romaji">happyaku en desu</span></div>
+    <div class="meaning">八百日元。</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry long">
+    <span class="index">43</span>
+    <div class="wordline"><span class="kana">わたしのでんわじゃありません。</span><span class="romaji">watashi no denwa ja arimasen</span></div>
+    <div class="meaning">不是我的电话。</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry long">
+    <span class="index">44</span>
+    <div class="wordline"><span class="kana">このほんはせんえんですね。</span><span class="romaji">kono hon wa sen en desu ne</span></div>
+    <div class="meaning">这本书是一千日元，对吧？</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry long">
+    <span class="index">45</span>
+    <div class="wordline"><span class="kana">せんこうはれきしですね。</span><span class="romaji">senkoo wa rekishi desu ne</span></div>
+    <div class="meaning">你的专业是历史，对吧？</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry long">
+    <span class="index">46</span>
+    <div class="wordline"><span class="kana">それ、なんですか。</span><span class="romaji">sore, nan desu ka</span></div>
+    <div class="meaning">那个是什么？</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry">
+    <span class="index">47</span>
+    <div class="wordline"><span class="kana">これですか。</span><span class="romaji">kore desu ka</span></div>
+    <div class="meaning">是这个吗？</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry">
+    <span class="index">48</span>
+    <div class="wordline"><span class="kana">さかなですよ。</span><span class="romaji">sakana desu yo</span></div>
+    <div class="meaning">是鱼哦。</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry long">
+    <span class="index">49</span>
+    <div class="wordline"><span class="kana">ちゅうごくごですね。</span><span class="romaji">chuugokugo desu ne</span></div>
+    <div class="meaning">是中文，对吧？</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry long">
+    <span class="index">50</span>
+    <div class="wordline"><span class="kana">ちゅうごくごじゃないです。</span><span class="romaji">chuugokugo ja nai desu</span></div>
+    <div class="meaning">不是中文。</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry">
+    <span class="index">51</span>
+    <div class="wordline"><span class="kana">にほんごですよ。</span><span class="romaji">nihongo desu yo</span></div>
+    <div class="meaning">是日语哦。</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry long">
+    <span class="index">52</span>
+    <div class="wordline"><span class="kana">とうきょうは、いまごじですね。</span><span class="romaji">tookyoo wa, ima goji desu ne</span></div>
+    <div class="meaning">东京现在是五点，对吧？</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry long">
+    <span class="index">53</span>
+    <div class="wordline"><span class="kana">いいえ、ごじじゃないです。</span><span class="romaji">iie, goji ja nai desu</span></div>
+    <div class="meaning">不，不是五点。</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry">
+    <span class="index">54</span>
+    <div class="wordline"><span class="kana">よじですよ。</span><span class="romaji">yoji desu yo</span></div>
+    <div class="meaning">是四点哦。</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry long">
+    <span class="index">55</span>
+    <div class="wordline"><span class="kana">すみません。ゆうびんきょくはどこですか。</span><span class="romaji">sumimasen. yuubinkyoku wa doko desu ka</span></div>
+    <div class="meaning">请问，邮局在哪里？</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry long">
+    <span class="index">56</span>
+    <div class="wordline"><span class="kana">せんこうはけいざいですね。</span><span class="romaji">senkoo wa keezai desu ne</span></div>
+    <div class="meaning">你的专业是经济学，对吧？</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry">
+    <span class="index">57</span>
+    <div class="wordline"><span class="kana">これはにくです。</span><span class="romaji">kore wa niku desu</span></div>
+    <div class="meaning">这是肉。</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry">
+    <span class="index">58</span>
+    <div class="wordline"><span class="kana">あれもにくです。</span><span class="romaji">are mo niku desu</span></div>
+    <div class="meaning">那个也是肉。</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry long">
+    <span class="index">59</span>
+    <div class="wordline"><span class="kana">これはとけいじゃありませんね。</span><span class="romaji">kore wa tokee ja arimasen ne</span></div>
+    <div class="meaning">这不是手表，对吧？</div>
+    <div class="source">W4 Script</div>
+  </article><article class="entry long">
+    <span class="index">60</span>
+    <div class="wordline"><span class="kana">みちこさんはがくせいですか。</span><span class="romaji">michiko san wa gakusee desu ka</span></div>
+    <div class="meaning">道子是学生吗？</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry long">
+    <span class="index">61</span>
+    <div class="wordline"><span class="kana">そうですか。わたしもがくせいです。</span><span class="romaji">soo desu ka. watashi mo gakusee desu</span></div>
+    <div class="meaning">是吗？我也是学生。</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry long">
+    <span class="index">62</span>
+    <div class="wordline"><span class="kana">どこのだいがくですか。</span><span class="romaji">doko no daigaku desu ka</span></div>
+    <div class="meaning">是哪所大学？</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry long">
+    <span class="index">63</span>
+    <div class="wordline"><span class="kana">あのう、すみません。</span><span class="romaji">anoo, sumimasen</span></div>
+    <div class="meaning">那个，不好意思。</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry long">
+    <span class="index">64</span>
+    <div class="wordline"><span class="kana">それはなんですか。</span><span class="romaji">sore wa nan desu ka</span></div>
+    <div class="meaning">那个是什么？</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry long">
+    <span class="index">65</span>
+    <div class="wordline"><span class="kana">これははさみです。</span><span class="romaji">kore wa hasami desu</span></div>
+    <div class="meaning">这是剪刀。</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry long">
+    <span class="index">66</span>
+    <div class="wordline"><span class="kana">これはなんですか。</span><span class="romaji">kore wa nan desu ka</span></div>
+    <div class="meaning">这个是什么？</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry long">
+    <span class="index">67</span>
+    <div class="wordline"><span class="kana">それはとんかつです。</span><span class="romaji">sore wa tonkatsu desu</span></div>
+    <div class="meaning">那是炸猪排。</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">68</span>
+    <div class="wordline"><span class="kana">さかなですか。</span><span class="romaji">sakana desu ka</span></div>
+    <div class="meaning">是鱼吗？</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry long">
+    <span class="index">69</span>
+    <div class="wordline"><span class="kana">いいえ、さかなじゃないです。</span><span class="romaji">iie, sakana ja nai desu</span></div>
+    <div class="meaning">不，不是鱼。</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">70</span>
+    <div class="wordline"><span class="kana">にくです。</span><span class="romaji">niku desu</span></div>
+    <div class="meaning">是肉。</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry long">
+    <span class="index">71</span>
+    <div class="wordline"><span class="kana">それはおすしです。</span><span class="romaji">sore wa osushi desu</span></div>
+    <div class="meaning">那是寿司。</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry long">
+    <span class="index">72</span>
+    <div class="wordline"><span class="kana">それはたこやきです。</span><span class="romaji">sore wa takoyaki desu</span></div>
+    <div class="meaning">那是章鱼烧。</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry long">
+    <span class="index">73</span>
+    <div class="wordline"><span class="kana">それはなっとうです。</span><span class="romaji">sore wa nattoo desu</span></div>
+    <div class="meaning">那是纳豆。</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry">
+    <span class="index">74</span>
+    <div class="wordline"><span class="kana">おいしいですか。</span><span class="romaji">oishii desu ka</span></div>
+    <div class="meaning">好吃吗？</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry long">
+    <span class="index">75</span>
+    <div class="wordline"><span class="kana">はい、おいしいですよ。</span><span class="romaji">hai, oishii desu yo</span></div>
+    <div class="meaning">是的，很好吃哦。</div>
+    <div class="source">W4 Communication</div>
+  </article><article class="entry long">
+    <span class="index">76</span>
+    <div class="wordline"><span class="kana">じゃあ、これをおねがいします。</span><span class="romaji">jaa, kore o onegaishimasu</span></div>
+    <div class="meaning">那么，请给我这个。</div>
+    <div class="source">W4 Communication</div>
+  </article></div>
+  </section><section class="chapter numbers">
+    <header class="chapter-head">
+      <div class="chapter-no">04</div>
+      <div><h2>数字、时间与年龄</h2><p>包含 0–100、百位、千位、时间和年龄中的特殊读法。</p></div>
+      <div class="chapter-count">59<small>条</small></div>
+    </header>
+    <div class="entries"><article class="entry">
+    <span class="index">01</span>
+    <div class="wordline"><span class="kana">れい</span><span class="romaji">rei</span></div>
+    <div class="meaning">数字 0（rei 读法）</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">02</span>
+    <div class="wordline"><span class="kana">ぜろ</span><span class="romaji">zero</span></div>
+    <div class="meaning">数字 0（zero 读法）</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">03</span>
+    <div class="wordline"><span class="kana">いち</span><span class="romaji">ichi</span></div>
+    <div class="meaning">数字 1</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">04</span>
+    <div class="wordline"><span class="kana">に</span><span class="romaji">ni</span></div>
+    <div class="meaning">数字 2</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">05</span>
+    <div class="wordline"><span class="kana">さん</span><span class="romaji">san</span></div>
+    <div class="meaning">数字 3</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">06</span>
+    <div class="wordline"><span class="kana">よん</span><span class="romaji">yon</span></div>
+    <div class="meaning">数字 4（常用读法）</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">07</span>
+    <div class="wordline"><span class="kana">し</span><span class="romaji">shi</span></div>
+    <div class="meaning">数字 4（另一读法）</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">08</span>
+    <div class="wordline"><span class="kana">ご</span><span class="romaji">go</span></div>
+    <div class="meaning">数字 5</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">09</span>
+    <div class="wordline"><span class="kana">ろく</span><span class="romaji">roku</span></div>
+    <div class="meaning">数字 6</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">10</span>
+    <div class="wordline"><span class="kana">なな</span><span class="romaji">nana</span></div>
+    <div class="meaning">数字 7（常用读法）</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">11</span>
+    <div class="wordline"><span class="kana">しち</span><span class="romaji">shichi</span></div>
+    <div class="meaning">数字 7（另一读法）</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">12</span>
+    <div class="wordline"><span class="kana">はち</span><span class="romaji">hachi</span></div>
+    <div class="meaning">数字 8</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">13</span>
+    <div class="wordline"><span class="kana">きゅう</span><span class="romaji">kyuu</span></div>
+    <div class="meaning">数字 9（常用读法）</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">14</span>
+    <div class="wordline"><span class="kana">く</span><span class="romaji">ku</span></div>
+    <div class="meaning">数字 9（另一读法）</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">15</span>
+    <div class="wordline"><span class="kana">じゅう</span><span class="romaji">juu</span></div>
+    <div class="meaning">数字 10</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">16</span>
+    <div class="wordline"><span class="kana">じゅういち</span><span class="romaji">juuichi</span></div>
+    <div class="meaning">数字 11</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">17</span>
+    <div class="wordline"><span class="kana">じゅうに</span><span class="romaji">juuni</span></div>
+    <div class="meaning">数字 12</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">18</span>
+    <div class="wordline"><span class="kana">じゅうさん</span><span class="romaji">juusan</span></div>
+    <div class="meaning">数字 13</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">19</span>
+    <div class="wordline"><span class="kana">じゅうよん</span><span class="romaji">juuyon</span></div>
+    <div class="meaning">数字 14</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">20</span>
+    <div class="wordline"><span class="kana">じゅうご</span><span class="romaji">juugo</span></div>
+    <div class="meaning">数字 15</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">21</span>
+    <div class="wordline"><span class="kana">じゅうろく</span><span class="romaji">juuroku</span></div>
+    <div class="meaning">数字 16</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">22</span>
+    <div class="wordline"><span class="kana">じゅうなな</span><span class="romaji">juunana</span></div>
+    <div class="meaning">数字 17</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">23</span>
+    <div class="wordline"><span class="kana">じゅうはち</span><span class="romaji">juuhachi</span></div>
+    <div class="meaning">数字 18</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">24</span>
+    <div class="wordline"><span class="kana">じゅうきゅう</span><span class="romaji">juukyuu</span></div>
+    <div class="meaning">数字 19</div>
+    <div class="source">W1 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">25</span>
+    <div class="wordline"><span class="kana">にじゅう</span><span class="romaji">nijuu</span></div>
+    <div class="meaning">数字 20</div>
+    <div class="source">W1/W2 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">26</span>
+    <div class="wordline"><span class="kana">さんじゅう</span><span class="romaji">sanjuu</span></div>
+    <div class="meaning">数字 30</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">27</span>
+    <div class="wordline"><span class="kana">よんじゅう</span><span class="romaji">yonjuu</span></div>
+    <div class="meaning">数字 40</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">28</span>
+    <div class="wordline"><span class="kana">ごじゅう</span><span class="romaji">gojuu</span></div>
+    <div class="meaning">数字 50</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">29</span>
+    <div class="wordline"><span class="kana">ろくじゅう</span><span class="romaji">rokujuu</span></div>
+    <div class="meaning">数字 60</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">30</span>
+    <div class="wordline"><span class="kana">ななじゅう</span><span class="romaji">nanajuu</span></div>
+    <div class="meaning">数字 70</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">31</span>
+    <div class="wordline"><span class="kana">はちじゅう</span><span class="romaji">hachijuu</span></div>
+    <div class="meaning">数字 80</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">32</span>
+    <div class="wordline"><span class="kana">きゅうじゅう</span><span class="romaji">kyuujuu</span></div>
+    <div class="meaning">数字 90</div>
+    <div class="source">W2 Script</div>
+  </article><article class="entry">
+    <span class="index">33</span>
+    <div class="wordline"><span class="kana">ひゃく</span><span class="romaji">hyaku</span></div>
+    <div class="meaning">数字 100</div>
+    <div class="source">W2/W3 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">34</span>
+    <div class="wordline"><span class="kana">にひゃく</span><span class="romaji">nihyaku</span></div>
+    <div class="meaning">数字 200</div>
+    <div class="source">W3 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">35</span>
+    <div class="wordline"><span class="kana">さんびゃく</span><span class="romaji">sanbyaku</span></div>
+    <div class="meaning">数字 300</div>
+    <div class="source">W3 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">36</span>
+    <div class="wordline"><span class="kana">よんひゃく</span><span class="romaji">yonhyaku</span></div>
+    <div class="meaning">数字 400</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry">
+    <span class="index">37</span>
+    <div class="wordline"><span class="kana">ごひゃく</span><span class="romaji">gohyaku</span></div>
+    <div class="meaning">数字 500</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry">
+    <span class="index">38</span>
+    <div class="wordline"><span class="kana">ろっぴゃく</span><span class="romaji">roppyaku</span></div>
+    <div class="meaning">数字 600</div>
+    <div class="source">W3/W4 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">39</span>
+    <div class="wordline"><span class="kana">ななひゃく</span><span class="romaji">nanahyaku</span></div>
+    <div class="meaning">数字 700</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry">
+    <span class="index">40</span>
+    <div class="wordline"><span class="kana">はっぴゃく</span><span class="romaji">happyaku</span></div>
+    <div class="meaning">数字 800</div>
+    <div class="source">W3 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">41</span>
+    <div class="wordline"><span class="kana">きゅうひゃく</span><span class="romaji">kyuuhyaku</span></div>
+    <div class="meaning">数字 900</div>
+    <div class="source">W3 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">42</span>
+    <div class="wordline"><span class="kana">せん</span><span class="romaji">sen</span></div>
+    <div class="meaning">数字 1,000</div>
+    <div class="source">W3 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">43</span>
+    <div class="wordline"><span class="kana">にせん</span><span class="romaji">nisen</span></div>
+    <div class="meaning">数字 2,000</div>
+    <div class="source">W3 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">44</span>
+    <div class="wordline"><span class="kana">さんぜん</span><span class="romaji">sanzen</span></div>
+    <div class="meaning">数字 3,000</div>
+    <div class="source">W3 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">45</span>
+    <div class="wordline"><span class="kana">よんせん</span><span class="romaji">yonsen</span></div>
+    <div class="meaning">数字 4,000</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry">
+    <span class="index">46</span>
+    <div class="wordline"><span class="kana">ごせん</span><span class="romaji">gosen</span></div>
+    <div class="meaning">数字 5,000</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry">
+    <span class="index">47</span>
+    <div class="wordline"><span class="kana">ろくせん</span><span class="romaji">rokusen</span></div>
+    <div class="meaning">数字 6,000</div>
+    <div class="source">W3 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">48</span>
+    <div class="wordline"><span class="kana">ななせん</span><span class="romaji">nanasen</span></div>
+    <div class="meaning">数字 7,000</div>
+    <div class="source">W3 Communication</div>
+  </article><article class="entry">
+    <span class="index">49</span>
+    <div class="wordline"><span class="kana">はっせん</span><span class="romaji">hassen</span></div>
+    <div class="meaning">数字 8,000</div>
+    <div class="source">W3 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">50</span>
+    <div class="wordline"><span class="kana">きゅうせん</span><span class="romaji">kyuusen</span></div>
+    <div class="meaning">数字 9,000</div>
+    <div class="source">W3 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">51</span>
+    <div class="wordline"><span class="kana">いちまん</span><span class="romaji">ichiman</span></div>
+    <div class="meaning">数字 10,000</div>
+    <div class="source">W3 Script/Communication</div>
+  </article><article class="entry">
+    <span class="index">52</span>
+    <div class="wordline"><span class="kana">よじ</span><span class="romaji">yoji</span></div>
+    <div class="meaning">4 点（特殊读法）</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">53</span>
+    <div class="wordline"><span class="kana">しちじ</span><span class="romaji">shichiji</span></div>
+    <div class="meaning">7 点</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">54</span>
+    <div class="wordline"><span class="kana">くじ</span><span class="romaji">kuji</span></div>
+    <div class="meaning">9 点（特殊读法）</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">55</span>
+    <div class="wordline"><span class="kana">じゅうはっさい</span><span class="romaji">juuhassai</span></div>
+    <div class="meaning">18 岁</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">56</span>
+    <div class="wordline"><span class="kana">じゅうきゅうさい</span><span class="romaji">juukyuusai</span></div>
+    <div class="meaning">19 岁</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">57</span>
+    <div class="wordline"><span class="kana">はたち</span><span class="romaji">hatachi</span></div>
+    <div class="meaning">20 岁（特殊说法）</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">58</span>
+    <div class="wordline"><span class="kana">にじゅういっさい</span><span class="romaji">nijuuissai</span></div>
+    <div class="meaning">21 岁</div>
+    <div class="source">W1 Communication</div>
+  </article><article class="entry">
+    <span class="index">59</span>
+    <div class="wordline"><span class="kana">にじゅうにさい</span><span class="romaji">nijuunisai</span></div>
+    <div class="meaning">22 岁</div>
+    <div class="source">W1 Communication</div>
+  </article></div>
+  </section><section class="chapter supplement">
+    <header class="chapter-head">
+      <div class="chapter-no">05</div>
+      <div><h2>假名覆盖补充词</h2><p>用常见词补齐 slides 词表未覆盖的基础假名、浊音与半浊音。</p></div>
+      <div class="chapter-count">14<small>条</small></div>
+    </header>
+    <div class="entries"><article class="entry">
+    <span class="index">01</span>
+    <div class="wordline"><span class="kana">いぬ</span><span class="romaji">inu</span></div>
+    <div class="meaning">狗；补 ぬ</div>
+    <div class="source">补充：基础46音</div>
+  </article><article class="entry">
+    <span class="index">02</span>
+    <div class="wordline"><span class="kana">へや</span><span class="romaji">heya</span></div>
+    <div class="meaning">房间；补 へ</div>
+    <div class="source">补充：基础46音</div>
+  </article><article class="entry">
+    <span class="index">03</span>
+    <div class="wordline"><span class="kana">むし</span><span class="romaji">mushi</span></div>
+    <div class="meaning">虫；补 む</div>
+    <div class="source">补充：基础46音</div>
+  </article><article class="entry">
+    <span class="index">04</span>
+    <div class="wordline"><span class="kana">くるま</span><span class="romaji">kuruma</span></div>
+    <div class="meaning">车；补 る</div>
+    <div class="source">补充：基础46音</div>
+  </article><article class="entry">
+    <span class="index">05</span>
+    <div class="wordline"><span class="kana">ざっし</span><span class="romaji">zasshi</span></div>
+    <div class="meaning">杂志；补 ざ</div>
+    <div class="source">补充：浊音</div>
+  </article><article class="entry">
+    <span class="index">06</span>
+    <div class="wordline"><span class="kana">ぐあい</span><span class="romaji">guai</span></div>
+    <div class="meaning">状况；身体情况；补 ぐ</div>
+    <div class="source">补充：浊音</div>
+  </article><article class="entry">
+    <span class="index">07</span>
+    <div class="wordline"><span class="kana">みず</span><span class="romaji">mizu</span></div>
+    <div class="meaning">水；补 ず</div>
+    <div class="source">补充：浊音</div>
+  </article><article class="entry">
+    <span class="index">08</span>
+    <div class="wordline"><span class="kana">はなぢ</span><span class="romaji">hanaji</span></div>
+    <div class="meaning">鼻血；补较少见的 ぢ</div>
+    <div class="source">补充：浊音</div>
+  </article><article class="entry">
+    <span class="index">09</span>
+    <div class="wordline"><span class="kana">つづく</span><span class="romaji">tsuzuku</span></div>
+    <div class="meaning">继续；补较少见的 づ</div>
+    <div class="source">补充：浊音</div>
+  </article><article class="entry">
+    <span class="index">10</span>
+    <div class="wordline"><span class="kana">ぱちぱち</span><span class="romaji">pachipachi</span></div>
+    <div class="meaning">啪啪声；补 ぱ</div>
+    <div class="source">补充：半浊音</div>
+  </article><article class="entry">
+    <span class="index">11</span>
+    <div class="wordline"><span class="kana">ぴかぴか</span><span class="romaji">pikapika</span></div>
+    <div class="meaning">闪闪发亮；补 ぴ</div>
+    <div class="source">补充：半浊音</div>
+  </article><article class="entry">
+    <span class="index">12</span>
+    <div class="wordline"><span class="kana">ぷかぷか</span><span class="romaji">pukapuka</span></div>
+    <div class="meaning">轻轻漂浮；补 ぷ</div>
+    <div class="source">补充：半浊音</div>
+  </article><article class="entry">
+    <span class="index">13</span>
+    <div class="wordline"><span class="kana">ぺこぺこ</span><span class="romaji">pekopeko</span></div>
+    <div class="meaning">肚子很饿／连连鞠躬；补 ぺ</div>
+    <div class="source">补充：半浊音</div>
+  </article><article class="entry">
+    <span class="index">14</span>
+    <div class="wordline"><span class="kana">ぽかぽか</span><span class="romaji">pokapoka</span></div>
+    <div class="meaning">暖洋洋；补 ぽ</div>
+    <div class="source">补充：半浊音</div>
+  </article></div>
+  </section>
+</body>
+</html>

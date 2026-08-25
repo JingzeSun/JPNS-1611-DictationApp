@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JPNS1611 平假名听写练习</title>
+  <style>
+    :root {
+      --ink: #132238;
+      --muted: #617087;
+      --paper: #f7f4ed;
+      --card: #fffef9;
+      --blue: #174f8a;
+      --blue2: #2d78bd;
+      --red: #c94040;
+      --green: #1d7a5b;
+      --line: #d9dee6;
+      --gold: #f0b429;
+      --shadow: 0 14px 40px rgba(23, 48, 80, .12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(240,180,41,.13), transparent 30rem),
+        linear-gradient(135deg, #f8f5ee 0%, #eef4fa 100%);
+      font-family: "Segoe UI", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      min-height: 100vh;
+    }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    .wrap { width: min(1700px, calc(100% - 28px)); margin: 0 auto; }
+    header { padding: 34px 0 22px; }
+    .eyebrow { color: var(--blue); letter-spacing: .14em; font-weight: 800; font-size: 12px; }
+    h1 { margin: 7px 0 8px; font-size: clamp(28px, 4.4vw, 48px); line-height: 1.08; }
+    .lead { margin: 0; max-width: 840px; color: var(--muted); line-height: 1.65; }
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .badge { padding: 7px 11px; background: rgba(255,255,255,.78); border: 1px solid var(--line); border-radius: 999px; font-size: 13px; }
+    .layout { display: grid; grid-template-columns: 280px minmax(620px, 1fr) 300px; gap: 20px; align-items: start; }
+    .panel { background: rgba(255,254,249,.93); border: 1px solid rgba(255,255,255,.8); box-shadow: var(--shadow); border-radius: 20px; }
+    .controls { padding: 18px; position: sticky; top: 14px; }
+    .controls h2, .library h2 { margin: 0 0 14px; font-size: 18px; }
+    label.control { display: block; margin: 13px 0 6px; font-size: 12px; font-weight: 800; color: var(--muted); letter-spacing: .06em; }
+    select, input[type="search"] { width: 100%; padding: 10px 11px; border: 1px solid var(--line); border-radius: 11px; background: white; color: var(--ink); }
+    .checkrow { display: flex; align-items: center; gap: 8px; margin: 14px 0; font-size: 14px; }
+    .mode-switch { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin: 7px 0 13px; padding: 5px; border: 1px solid var(--line); border-radius: 13px; background: #eef2f7; }
+    .mode-switch input { position: absolute; opacity: 0; pointer-events: none; }
+    .mode-switch span { display: block; padding: 10px 7px; border-radius: 9px; text-align: center; font-size: 13px; font-weight: 800; cursor: pointer; }
+    .mode-switch input:checked + span { color: white; background: var(--blue); box-shadow: 0 4px 12px rgba(23,79,138,.22); }
+    .actiongrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+    .btn { border: 0; border-radius: 11px; padding: 10px 13px; font-weight: 750; color: var(--ink); background: #e9eef5; }
+    .btn:hover { filter: brightness(.97); transform: translateY(-1px); }
+    .btn.primary { color: white; background: var(--blue); }
+    .btn.gold { background: var(--gold); }
+    .btn.ghost { background: white; border: 1px solid var(--line); }
+    .study { padding: clamp(18px, 4vw, 34px); min-height: 640px; }
+    .study.sentence-card .meaning { font-size: clamp(21px, 3vw, 32px); }
+    .study.sentence-card canvas { height: 300px; background-size: 42px 42px; }
+    .cardtop { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .tag { padding: 6px 10px; border-radius: 999px; background: #e7f0fa; color: var(--blue); font-size: 12px; font-weight: 800; }
+    .progress { color: var(--muted); font-size: 13px; }
+    .prompt { text-align: center; padding: 38px 10px 18px; }
+    .meaning { font-size: clamp(24px, 4vw, 38px); font-weight: 850; line-height: 1.2; }
+    .source { margin-top: 10px; color: var(--muted); font-size: 13px; }
+    .romaji { min-height: 32px; margin-top: 12px; color: var(--blue); font-size: 20px; font-weight: 800; }
+    .listen { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; padding: 13px 20px; border: 0; border-radius: 999px; background: var(--blue); color: white; font-weight: 850; }
+    .listen:before { content: "▶"; font-size: 12px; }
+    .answerbox { max-width: 650px; margin: 8px auto 0; display: none; }
+    .answerbox.on { display: block; }
+    .answerbox input { width: 100%; padding: 14px 16px; border: 2px solid var(--line); border-radius: 14px; font-size: 26px; text-align: center; background: white; ime-mode: active; }
+    .answerbox input:focus { outline: 3px solid rgba(45,120,189,.18); border-color: var(--blue2); }
+    .answer-actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9px; margin-top: 10px; }
+    .feedback { min-height: 74px; text-align: center; padding: 16px 8px 0; line-height: 1.55; }
+    .feedback.good { color: var(--green); }
+    .feedback.bad { color: var(--red); }
+    .answer-kana { font-family: "Yu Mincho", "Yu Gothic", "Noto Sans JP", sans-serif; font-size: 31px; font-weight: 850; letter-spacing: .08em; }
+    .canvas-wrap { max-width: 650px; margin: 14px auto 0; display: none; }
+    .canvas-wrap.on { display: block; }
+    canvas { width: 100%; height: 230px; display: block; border: 2px dashed #b8c3d1; border-radius: 15px; background-color: #fff; background-image: linear-gradient(#edf0f4 1px, transparent 1px), linear-gradient(90deg, #edf0f4 1px, transparent 1px); background-size: 46px 46px; touch-action: none; }
+    .canvasbar { display: flex; justify-content: flex-end; gap: 8px; margin-top: 7px; }
+    .self-grade { display: none; justify-content: center; gap: 9px; margin: 9px auto 0; }
+    .self-grade.on { display: flex; }
+    .nav { display: flex; justify-content: space-between; gap: 10px; max-width: 650px; margin: 24px auto 0; }
+    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; max-width: 650px; margin: 16px auto 0; }
+    .stat { text-align: center; padding: 10px; border: 1px solid var(--line); border-radius: 12px; background: #fbfcfe; font-size: 12px; color: var(--muted); }
+    .stat strong { display: block; color: var(--ink); font-size: 21px; }
+    .history { padding: 18px; position: sticky; top: 14px; overflow: hidden; }
+    .history-head { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; margin-bottom: 5px; }
+    .history h2 { margin: 0; font-size: 18px; }
+    .history-count { color: var(--muted); font-size: 12px; }
+    .history-legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 9px 0 13px; color: var(--muted); font-size: 11px; }
+    .legend-dot { display: inline-block; width: 8px; height: 8px; margin-right: 3px; border-radius: 50%; background: var(--blue2); }
+    .legend-dot.correct { background: var(--green); }
+    .legend-dot.review { background: var(--red); }
+    .history-scroll { overflow-x: auto; overflow-y: hidden; padding: 1px 0 8px; scrollbar-width: thin; }
+    .history-grid { display: grid; grid-template-rows: repeat(15, 36px); grid-auto-flow: column; grid-auto-columns: 126px; gap: 6px; width: max-content; min-width: 100%; }
+    .history-empty { grid-row: 1 / span 3; width: 245px; padding: 17px 12px; border: 1px dashed #bcc8d5; border-radius: 12px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .history-item { display: grid; grid-template-columns: 9px 1fr; align-items: center; gap: 7px; width: 126px; padding: 5px 7px; border: 1px solid var(--line); border-radius: 9px; background: white; color: var(--ink); text-align: left; }
+    .history-item:hover { border-color: var(--blue2); }
+    .history-item.current { outline: 2px solid rgba(45,120,189,.26); border-color: var(--blue2); }
+    .history-item .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue2); }
+    .history-item.correct .dot { background: var(--green); }
+    .history-item.review { border-color: rgba(201,64,64,.42); background: #fff7f6; }
+    .history-item.review .dot { background: var(--red); box-shadow: 0 0 0 3px rgba(201,64,64,.12); }
+    .history-label { display: flex; align-items: baseline; justify-content: space-between; gap: 4px; min-width: 0; }
+    .history-label b { font-size: 11px; white-space: nowrap; }
+    .history-label span { overflow: hidden; color: var(--muted); font-family: "Yu Gothic",sans-serif; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+    .library { margin: 22px 0 42px; padding: 22px; }
+    .libhead { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
+    .libtools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .libtools input[type="search"] { width: min(260px, 70vw); }
+    .tablewrap { overflow-x: auto; margin-top: 14px; border: 1px solid var(--line); border-radius: 13px; }
+    table { width: 100%; border-collapse: collapse; background: white; font-size: 14px; }
+    th, td { padding: 10px 11px; border-bottom: 1px solid #edf0f4; text-align: left; vertical-align: top; }
+    th { position: sticky; top: 0; background: #edf2f8; color: #45556a; font-size: 12px; letter-spacing: .04em; }
+    td.kana { font-family: "Yu Mincho", "Yu Gothic", sans-serif; font-size: 18px; font-weight: 800; }
+    .hidden-answer { color: transparent; text-shadow: 0 0 8px rgba(19,34,56,.36); user-select: none; cursor: pointer; }
+    .hidden-answer:hover { color: var(--blue); text-shadow: none; }
+    .smallnote { color: var(--muted); font-size: 12px; line-height: 1.55; }
+    footer { padding: 0 0 30px; color: var(--muted); font-size: 12px; text-align: center; }
+    @media (max-width: 1260px) {
+      .layout { grid-template-columns: 280px minmax(0,1fr); }
+      .history { position: static; grid-column: 1 / -1; }
+    }
+    @media (max-width: 820px) {
+      .layout { grid-template-columns: 1fr; }
+      .controls, .history { position: static; grid-column: auto; }
+      .study { min-height: auto; }
+    }
+    @media print {
+      body { background: white; }
+      header, .layout, footer, .libtools .btn, .smallnote { display: none !important; }
+      .wrap { width: 100%; }
+      .library { box-shadow: none; border: 0; margin: 0; padding: 0; }
+      .library h2:after { content: "（当前筛选）"; font-weight: normal; }
+      .libtools { display: none; }
+      .tablewrap { border: 0; overflow: visible; }
+      table { font-size: 11px; }
+      th { position: static; }
+      tr { break-inside: avoid; }
+      td.kana.hidden-answer { color: transparent !important; text-shadow: none !important; border-bottom: 1px solid #222; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="eyebrow">JPNS1611 · WEEK 1–4 TUTORIAL SLIDES</div>
+    <h1>平假名听写练习</h1>
+    <p class="lead">点“听发音”，在输入框里打平假名，或切换到手写板用鼠标/触控笔写。默认先练最像 Script Quiz 的明确读写词；对话、数字和补全字符可以分开刷。</p>
+    <div class="badges">
+      <span class="badge" id="countBadge">正在统计…</span>
+      <span class="badge" id="basicBadge">基础假名覆盖检查中…</span>
+      <span class="badge" id="voicedBadge">浊音覆盖检查中…</span>
+      <span class="badge">含 っ・ゃ・ゅ・ょ</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="layout">
+      <aside class="panel controls">
+        <h2>练习设置</h2>
+        <label class="control" for="deck">题库</label>
+        <select id="deck">
+          <option value="core">Script 高频（建议先刷）</option>
+          <option value="dialogue">对话与课内词汇</option>
+          <option value="sentences">句子听写</option>
+          <option value="numbers">数字、时间与年龄</option>
+          <option value="supplement">补全假名的常见词</option>
+          <option value="all">全部题目</option>
+          <option value="wrong">重点复习（已保存）</option>
+        </select>
+
+        <label class="control" for="week">来源</label>
+        <select id="week">
+          <option value="all">W1–W4 全部</option>
+          <option value="W1">Week 1</option>
+          <option value="W2">Week 2</option>
+          <option value="W3">Week 3</option>
+          <option value="W4">Week 4</option>
+          <option value="补充">仅补充词</option>
+        </select>
+
+        <label class="control">作答方式（默认手写）</label>
+        <div class="mode-switch" role="radiogroup" aria-label="作答方式">
+          <label><input id="handMode" name="answerMode" type="radio" value="hand" checked><span>✍ 鼠标手写</span></label>
+          <label><input id="typeMode" name="answerMode" type="radio" value="type"><span>⌨ 键盘输入</span></label>
+        </div>
+        <label class="checkrow"><input id="romajiToggle" type="checkbox"> 显示罗马字提示</label>
+        <label class="checkrow"><input id="autoNext" type="checkbox"> 答对后自动下一题</label>
+
+        <div class="actiongrid">
+          <button class="btn primary" id="shuffleBtn">随机洗牌</button>
+          <button class="btn ghost" id="resetBtn">清空进度</button>
+        </div>
+        <p class="smallnote">发音使用浏览器自带的日语语音。若没有声音，请在 Windows 中安装一个日语语音包，或直接让同学照清单念。</p>
+      </aside>
+
+      <section class="panel study" aria-live="polite">
+        <div class="cardtop">
+          <span class="tag" id="deckTag">Script 高频</span>
+          <span class="progress" id="progress">1 / 1</span>
+        </div>
+        <div class="prompt">
+          <div class="meaning" id="meaning">加载中…</div>
+          <div class="source" id="source"></div>
+          <div class="romaji" id="romaji"></div>
+          <button class="listen" id="listenBtn">听发音</button>
+        </div>
+        <div class="answerbox">
+          <input id="answerInput" lang="ja" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="在这里输入ひらがな" aria-label="平假名答案">
+          <div class="answer-actions">
+            <button class="btn primary" id="checkBtn">检查</button>
+            <button class="btn ghost" id="revealBtn">看答案</button>
+            <button class="btn ghost" id="clearBtn">清空</button>
+          </div>
+        </div>
+        <div class="canvas-wrap on" id="canvasWrap">
+          <canvas id="pad" aria-label="手写练习板"></canvas>
+          <div class="canvasbar">
+            <button class="btn ghost" id="clearPad">擦掉重写</button>
+            <button class="btn primary" id="handRevealBtn">写好了，看答案</button>
+          </div>
+          <div class="self-grade" id="selfGrade">
+            <button class="btn primary" id="selfRightBtn">✓ 我写对了</button>
+            <button class="btn ghost" id="selfWrongBtn">需要复习</button>
+          </div>
+        </div>
+        <div class="feedback" id="feedback"></div>
+        <div class="nav">
+          <button class="btn ghost" id="prevBtn">← 上一题</button>
+          <button class="btn gold" id="nextBtn">下一题 →</button>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong id="doneStat">0</strong>已作答</div>
+          <div class="stat"><strong id="rightStat">0</strong>已掌握</div>
+          <div class="stat"><strong id="wrongStat">0</strong>重点复习</div>
+        </div>
+      </section>
+
+      <aside class="panel history">
+        <div class="history-head">
+          <h2>本轮答题记录</h2>
+          <span class="history-count" id="historyCount">0 题</span>
+        </div>
+        <div class="history-legend">
+          <span><i class="legend-dot"></i>已完成</span>
+          <span><i class="legend-dot correct"></i>已掌握</span>
+          <span><i class="legend-dot review"></i>重点复习</span>
+        </div>
+        <div class="history-scroll" id="historyScroll">
+          <div class="history-grid" id="historyGrid"></div>
+        </div>
+        <p class="smallnote">每列最多 15 题，超过后自动进入下一列。点击记录可返回该题。<br><span id="saveState">进度会自动保存在当前浏览器。</span></p>
+      </aside>
+    </section>
+
+    <section class="panel library">
+      <div class="libhead">
+        <div>
+          <h2>完整清单</h2>
+          <div class="smallnote">点击模糊答案可临时查看；表格跟随上面的题库与 Week 筛选。</div>
+        </div>
+        <div class="libtools">
+          <input id="search" type="search" placeholder="搜中文、romaji、假名或来源">
+          <label class="checkrow"><input id="showAnswers" type="checkbox"> 显示答案</label>
+          <button class="btn ghost" id="csvBtn">导出 CSV</button>
+          <button class="btn ghost" id="printBtn">打印练习表</button>
+        </div>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>#</th><th>来源</th><th>听写提示 / 中文</th><th>Romaji</th><th>平假名答案</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap">资料范围：当前文件夹内 W1–W4 Script 与 Communication slides。片假名专用词未强行改写成平假名。</footer>
+
+  <script>
+    const items = [
+      // Script slides: explicit reading/writing practice and hiragana review words.
+      ["core","W1 Script","あお","ao","蓝色；练读音"],
+      ["core","W1/W2 Script","うえ","ue","上面"],
+      ["core","W1 Script","あい","ai","爱；练读音"],
+      ["core","W1 Script","かき","kaki","柿子／牡蛎；练读音"],
+      ["core","W1 Script","こけ","koke","苔藓"],
+      ["core","W1/W2 Script","かく","kaku","写"],
+      ["core","W1 Script","えき","eki","车站"],
+      ["core","W1 Script","きあい","kiai","干劲；气势"],
+      ["core","W1 Script","すし","sushi","寿司"],
+      ["core","W1 Script","しそ","shiso","紫苏"],
+      ["core","W1 Script","さす","sasu","指／刺；练读音"],
+      ["core","W1 Script","せかい","sekai","世界"],
+      ["core","W1 Script","おかし","okashi","点心；零食"],
+      ["core","W1 Script","て","te","手"],
+      ["core","W1 Script","たつ","tatsu","站立"],
+      ["core","W1/W2 Script","とち","tochi","土地"],
+      ["core","W1 Script","たすけ","tasuke","帮助"],
+      ["core","W1 Script","ちしき","chishiki","知识"],
+      ["core","W1/W2 Script","とめ","tome","停笔（笔画术语）"],
+      ["core","W1/W2 Script","はね","hane","钩（笔画术语）"],
+      ["core","W1/W2 Script","はらい","harai","扫／撇（笔画术语）"],
+      ["core","W2 Script","こい","koi","恋爱／鲤鱼；练读音"],
+      ["core","W2 Script","おか","oka","山冈"],
+      ["core","W2 Script","いけ","ike","池塘"],
+      ["core","W2 Script","あき","aki","秋天"],
+      ["core","W2 Script","そと","soto","外面"],
+      ["core","W2 Script","かたて","katate","单手"],
+      ["core","W2 Script","きせつ","kisetsu","季节"],
+      ["core","W2/W3 Script","はい","hai","是；好的"],
+      ["core","W2/W3 Script","いま","ima","现在"],
+      ["core","W2/W3 Script","にほん","nihon","日本"],
+      ["core","W2/W3 Script","わたし","watashi","我"],
+      ["core","W2/W3 Script","なまえ","namae","名字"],
+      ["core","W2/W3 Script","れきし","rekishi","历史"],
+      ["core","W2 Script","ふとん","futon","日式被褥"],
+      ["core","W2 Script","きもの","kimono","和服"],
+      ["core","W2 Script","さしみ","sashimi","刺身"],
+      ["core","W2 Script","てりやき","teriyaki","照烧"],
+      ["core","W2/W3 Script","ごご","gogo","下午；PM"],
+      ["core","W2/W3 Script","しごと","shigoto","工作"],
+      ["core","W2/W3 Script","ごぜん","gozen","上午；AM"],
+      ["core","W2 Script","にほんご","nihongo","日语"],
+      ["core","W2 Script","にじ","niji","两点／彩虹（同音）"],
+      ["core","W2 Script","でんわ","denwa","电话"],
+      ["core","W2/W3 Script","だいがく","daigaku","大学"],
+      ["core","W2/W3 Script","ともだち","tomodachi","朋友"],
+      ["core","W2 Script","べんごし","bengoshi","律师"],
+      ["core","W2 Script","かんごし","kangoshi","护士"],
+      ["core","W3 Script","いしや","ishiya","石材店／石匠；发音对比"],
+      ["core","W3/W4 Script","いしゃ","isha","医生"],
+      ["core","W3 Script","しゅふ","shufu","主妇／家庭主理人"],
+      ["core","W3/W4 Script","としょかん","toshokan","图书馆"],
+      ["core","W3 Script","おちゃ","ocha","茶"],
+      ["core","W3/W4 Script","ゆうびんきょく","yuubinkyoku","邮局"],
+      ["core","W3 Script","いち","ichi","一；发音对比"],
+      ["core","W3 Script","いっち","icchi","一致；发音对比"],
+      ["core","W3 Script","おと","oto","声音"],
+      ["core","W3 Script","おっと","otto","丈夫；发音对比"],
+      ["core","W3 Script","はっせん","hassen","八千"],
+      ["core","W3/W4 Script","ろっぴゃく","roppyaku","六百"],
+      ["core","W3 Script","おかあさん","okaasan","母亲（别人的／称呼）"],
+      ["core","W3 Script","おねえさん","oneesan","姐姐（别人的／称呼）"],
+      ["core","W3/W4 Script","ちゅうごく","chuugoku","中国"],
+      ["core","W3/W4 Script","おにいさん","oniisan","哥哥（别人的／称呼）"],
+      ["core","W3 Script","おいしい","oishii","好吃"],
+      ["core","W3 Script","おはよう","ohayoo","早上好"],
+      ["core","W3 Script","おおきい","ookii","大的"],
+      ["core","W3 Script","せいじ","seeji","政治"],
+      ["core","W3 Script","えいご","eego","英语"],
+      ["core","W3 Script","こうこう","kookoo","高中"],
+      ["core","W3/W4 Script","せんせい","sensee","老师"],
+      ["core","W3/W4 Script","せんこう","senkoo","专业"],
+      ["core","W3 Script","がくせい","gakusee","学生"],
+      ["core","W3 Script","おとうと","otooto","弟弟"],
+      ["core","W3 Script","がっこう","gakkoo","学校"],
+      ["core","W3 Script","かいしゃいん","kaishain","公司职员"],
+      ["core","W3/W4 Script","りゅうがくせい","ryuugakusee","留学生"],
+      ["core","W3 Script","ここ","koko","这里"],
+      ["core","W3 Script","おばさん","obasan","阿姨；中年女士"],
+      ["core","W3 Script","おばあさん","obaasan","祖母；老奶奶"],
+      ["core","W3 Script","さか","saka","坡"],
+      ["core","W3 Script","さっか","sakka","作家"],
+      ["core","W3 Script","しじん","shijin","诗人"],
+      ["core","W3 Script","しゅじん","shujin","丈夫"],
+      ["core","W3 Script","しゅうじん","shuujin","囚犯"],
+      ["core","W3/W4 Script","ひゃく","hyaku","一百"],
+      ["core","W3/W4 Script","じてんしゃ","jitensha","自行车"],
+      ["core","W3/W4 Script","とけい","tokee","钟表；手表"],
+      ["core","W3/W4 Script","おとうさん","otoosan","父亲（别人的／称呼）"],
+      ["core","W3/W4 Script","どうぞ","doozo","请；给你"],
+      ["core","W3 Script","ぼうし","booshi","帽子"],
+      ["core","W3/W4 Script","さんびゃく","sanbyaku","三百"],
+      ["core","W3/W4 Script title","げんき","genki","有精神；《Genki》教材名"],
+
+      // Communication slides and dialogue language.
+      ["dialogue","W1 Communication","おはようございます","ohayoo gozaimasu","早上好（礼貌）"],
+      ["dialogue","W1 Communication","こんにちは","konnichiwa","你好；下午好"],
+      ["dialogue","W1 Communication","こんばんは","konbanwa","晚上好"],
+      ["dialogue","W1 Communication","ありがとうございます","arigatoo gozaimasu","非常感谢"],
+      ["dialogue","W1 Communication","いいえ","iie","不；不用谢"],
+      ["dialogue","W1/W4 Communication","すみません","sumimasen","不好意思；劳驾"],
+      ["dialogue","W1 Communication","おやすみなさい","oyasuminasai","晚安"],
+      ["dialogue","W1/W2 Communication","はじめまして","hajimemashite","初次见面"],
+      ["dialogue","W1/W2 Communication","よろしくおねがいします","yoroshiku onegaishimasu","请多关照"],
+      ["dialogue","W1/W2 Communication","でんわばんごう","denwa bangoo","电话号码"],
+      ["dialogue","W1 Communication","なんばん","nanban","几号；什么号码"],
+      ["dialogue","W1 Communication","じ","ji","点钟（时间后缀）"],
+      ["dialogue","W1 Communication","はん","han","半；半点"],
+      ["dialogue","W1 Communication","なんじ","nanji","几点"],
+      ["dialogue","W1 Communication","さい","sai","岁（年龄后缀）"],
+      ["dialogue","W1 Communication","なんさい","nansai","几岁"],
+      ["dialogue","W1 Communication","はたち","hatachi","二十岁"],
+      ["dialogue","W2 Communication","だいがくせい","daigakusee","大学生"],
+      ["dialogue","W2 Communication","だいがくいんせい","daigakuinsee","研究生"],
+      ["dialogue","W2/W4 Communication","そうです","soo desu","是的；对的"],
+      ["dialogue","W2/W4 Communication","そうですか","soo desu ka","是吗；原来如此"],
+      ["dialogue","W2 Communication","なんねんせい","nannensee","几年级学生"],
+      ["dialogue","W2 Communication","にねんせい","ninensee","二年级学生"],
+      ["dialogue","W2 Communication","さんねんせい","sannensee","三年级学生"],
+      ["dialogue","W2 Communication","よねんせい","yonensee","四年级学生"],
+      ["dialogue","W2/W4 Communication","けいざい","keezai","经济（学）"],
+      ["dialogue","W2 Communication","あの","ano","那个；嗯／打扰一下"],
+      ["dialogue","W3/W4 Communication","かいもの","kaimono","购物"],
+      ["dialogue","W3 Communication","いくら","ikura","多少钱"],
+      ["dialogue","W3 Communication","えん","en","日元"],
+      ["dialogue","W3/W4 Communication","これ","kore","这个"],
+      ["dialogue","W3/W4 Communication","それ","sore","那个（靠近听者）"],
+      ["dialogue","W3/W4 Communication","あれ","are","那个（离双方都远）"],
+      ["dialogue","W3 Communication","どれ","dore","哪一个"],
+      ["dialogue","W3 Communication","この","kono","这个……"],
+      ["dialogue","W3 Communication","その","sono","那个……（靠近听者）"],
+      ["dialogue","W3 Communication","どの","dono","哪个……"],
+      ["dialogue","W3 Communication","そこ","soko","那里（靠近听者）"],
+      ["dialogue","W3 Communication","あそこ","asoko","那里（离双方都远）"],
+      ["dialogue","W3/W4 Communication","どこ","doko","哪里"],
+      ["dialogue","W3 Communication","どこの","doko no","哪里的……"],
+      ["dialogue","W3 Communication","だれ","dare","谁"],
+      ["dialogue","W3 Script","ぎんこう","ginkoo","银行"],
+      ["dialogue","W3 Script","かさ","kasa","伞"],
+      ["dialogue","W3/W4 Script","ほん","hon","书"],
+      ["dialogue","W4 Communication","さかな","sakana","鱼"],
+      ["dialogue","W4 Communication","にく","niku","肉"],
+      ["dialogue","W4 Communication","やさい","yasai","蔬菜"],
+      ["dialogue","W4 Communication","しんぶん","shinbun","报纸"],
+      ["dialogue","W4 Communication","ちゅうごくご","chuugokugo","中文；汉语"],
+      ["dialogue","W4 Communication","はさみ","hasami","剪刀"],
+      ["dialogue","W4 Communication","とんかつ","tonkatsu","炸猪排"],
+      ["dialogue","W4 Communication","おすし","osushi","寿司（礼貌说法）"],
+      ["dialogue","W4 Communication","たこやき","takoyaki","章鱼烧"],
+      ["dialogue","W4 Communication","なっとう","nattoo","纳豆"],
+      ["dialogue","W4 Communication","じゃないです","janai desu","不是……"],
+      ["dialogue","W4 Script/Communication","じゃありません","ja arimasen","不是……（礼貌）"],
+      ["dialogue","W4 Script","ではありません","dewa arimasen","不是……（较正式）"],
+      ["dialogue","W4 Communication","あのう","anoo","嗯；打扰一下"],
+      ["dialogue","W4 Communication","ああ","aa","啊；原来如此"],
+      ["dialogue","W4 Communication","じゃあ","jaa","那么；那就"],
+      ["dialogue","W4 Communication","おねがいします","onegaishimasu","拜托了；请给我"],
+      ["dialogue","W4 Communication","これをおねがいします","kore o onegaishimasu","请给我这个"],
+      ["dialogue","W3/W4 Dialogue audio","これをください","kore o kudasai","请给我这个"],
+      ["dialogue","W3/W4 Dialogue audio","ください","kudasai","请给我……"],
+      ["dialogue","W3 Dialogue audio","ちょっと","chotto","有点；稍微"],
+      ["dialogue","W4 Communication menu","ていしょく","teeshoku","套餐；定食"],
+      ["dialogue","W4 Communication menu","そば","soba","荞麦面"],
+      ["dialogue","W4 Communication menu","うどん","udon","乌冬面"],
+      ["dialogue","W4 Communication menu","こうちゃ","koocha","红茶"],
+      ["dialogue","W4 Script","とうきょう","tookyoo","东京"],
+
+      // Common words added only to fill kana that did not appear in the extracted slide word list.
+      ["supplement","补充：基础46音","いぬ","inu","狗；补 ぬ"],
+      ["supplement","补充：基础46音","へや","heya","房间；补 へ"],
+      ["supplement","补充：基础46音","むし","mushi","虫；补 む"],
+      ["supplement","补充：基础46音","くるま","kuruma","车；补 る"],
+      ["supplement","补充：浊音","ざっし","zasshi","杂志；补 ざ"],
+      ["supplement","补充：浊音","ぐあい","guai","状况；身体情况；补 ぐ"],
+      ["supplement","补充：浊音","みず","mizu","水；补 ず"],
+      ["supplement","补充：浊音","はなぢ","hanaji","鼻血；补较少见的 ぢ"],
+      ["supplement","补充：浊音","つづく","tsuzuku","继续；补较少见的 づ"],
+      ["supplement","补充：半浊音","ぱちぱち","pachipachi","啪啪声；补 ぱ"],
+      ["supplement","补充：半浊音","ぴかぴか","pikapika","闪闪发亮；补 ぴ"],
+      ["supplement","补充：半浊音","ぷかぷか","pukapuka","轻轻漂浮；补 ぷ"],
+      ["supplement","补充：半浊音","ぺこぺこ","pekopeko","肚子很饿／连连鞠躬；补 ぺ"],
+      ["supplement","补充：半浊音","ぽかぽか","pokapoka","暖洋洋；补 ぽ"]
+    ].map((x, i) => ({id: i + 1, deck: x[0], source: x[1], kana: x[2], romaji: x[3], meaning: x[4]}));
+
+    const numberData = [
+      ["W1 Script/Communication","れい","rei","数字 0（rei 读法）"],
+      ["W1 Script/Communication","ぜろ","zero","数字 0（zero 读法）"],
+      ["W1 Script/Communication","いち","ichi","数字 1"],
+      ["W1 Script/Communication","に","ni","数字 2"],
+      ["W1 Script/Communication","さん","san","数字 3"],
+      ["W1 Script/Communication","よん","yon","数字 4（常用读法）"],
+      ["W1 Script/Communication","し","shi","数字 4（另一读法）"],
+      ["W1 Script/Communication","ご","go","数字 5"],
+      ["W1 Script/Communication","ろく","roku","数字 6"],
+      ["W1 Script/Communication","なな","nana","数字 7（常用读法）"],
+      ["W1 Script/Communication","しち","shichi","数字 7（另一读法）"],
+      ["W1 Script/Communication","はち","hachi","数字 8"],
+      ["W1 Script/Communication","きゅう","kyuu","数字 9（常用读法）"],
+      ["W1 Script/Communication","く","ku","数字 9（另一读法）"],
+      ["W1 Script/Communication","じゅう","juu","数字 10"],
+      ["W1 Script/Communication","じゅういち","juuichi","数字 11"],
+      ["W1 Script/Communication","じゅうに","juuni","数字 12"],
+      ["W1 Script/Communication","じゅうさん","juusan","数字 13"],
+      ["W1 Script/Communication","じゅうよん","juuyon","数字 14"],
+      ["W1 Script/Communication","じゅうご","juugo","数字 15"],
+      ["W1 Script/Communication","じゅうろく","juuroku","数字 16"],
+      ["W1 Script/Communication","じゅうなな","juunana","数字 17"],
+      ["W1 Script/Communication","じゅうはち","juuhachi","数字 18"],
+      ["W1 Script/Communication","じゅうきゅう","juukyuu","数字 19"],
+      ["W1/W2 Script/Communication","にじゅう","nijuu","数字 20"],
+      ["W2 Script","さんじゅう","sanjuu","数字 30"],
+      ["W2 Script","よんじゅう","yonjuu","数字 40"],
+      ["W2 Script","ごじゅう","gojuu","数字 50"],
+      ["W2 Script","ろくじゅう","rokujuu","数字 60"],
+      ["W2 Script","ななじゅう","nanajuu","数字 70"],
+      ["W2 Script","はちじゅう","hachijuu","数字 80"],
+      ["W2 Script","きゅうじゅう","kyuujuu","数字 90"],
+      ["W2/W3 Script/Communication","ひゃく","hyaku","数字 100"],
+      ["W3 Script/Communication","にひゃく","nihyaku","数字 200"],
+      ["W3 Script/Communication","さんびゃく","sanbyaku","数字 300"],
+      ["W3 Communication","よんひゃく","yonhyaku","数字 400"],
+      ["W3 Communication","ごひゃく","gohyaku","数字 500"],
+      ["W3/W4 Script/Communication","ろっぴゃく","roppyaku","数字 600"],
+      ["W3 Communication","ななひゃく","nanahyaku","数字 700"],
+      ["W3 Script/Communication","はっぴゃく","happyaku","数字 800"],
+      ["W3 Script/Communication","きゅうひゃく","kyuuhyaku","数字 900"],
+      ["W3 Script/Communication","せん","sen","数字 1,000"],
+      ["W3 Script/Communication","にせん","nisen","数字 2,000"],
+      ["W3 Script/Communication","さんぜん","sanzen","数字 3,000"],
+      ["W3 Communication","よんせん","yonsen","数字 4,000"],
+      ["W3 Communication","ごせん","gosen","数字 5,000"],
+      ["W3 Script/Communication","ろくせん","rokusen","数字 6,000"],
+      ["W3 Communication","ななせん","nanasen","数字 7,000"],
+      ["W3 Script/Communication","はっせん","hassen","数字 8,000"],
+      ["W3 Script/Communication","きゅうせん","kyuusen","数字 9,000"],
+      ["W3 Script/Communication","いちまん","ichiman","数字 10,000"],
+      ["W1 Communication","よじ","yoji","4 点（特殊读法）"],
+      ["W1 Communication","しちじ","shichiji","7 点"],
+      ["W1 Communication","くじ","kuji","9 点（特殊读法）"],
+      ["W1 Communication","じゅうはっさい","juuhassai","18 岁"],
+      ["W1 Communication","じゅうきゅうさい","juukyuusai","19 岁"],
+      ["W1 Communication","はたち","hatachi","20 岁（特殊说法）"],
+      ["W1 Communication","にじゅういっさい","nijuuissai","21 岁"],
+      ["W1 Communication","にじゅうにさい","nijuunisai","22 岁"]
+    ];
+    numberData.forEach(x => items.push({id: items.length + 1, deck:"numbers", source:x[0], kana:x[1], romaji:x[2], meaning:x[3]}));
+
+    const sentenceData = [
+      ["W1 Communication","おはようございます。","ohayoo gozaimasu","早上好（礼貌）"],
+      ["W1 Communication","こんにちは。","konnichiwa","你好；下午好"],
+      ["W1 Communication","こんばんは。","konbanwa","晚上好"],
+      ["W1 Communication","ありがとうございます。","arigatoo gozaimasu","非常感谢"],
+      ["W1/W2 Communication","はじめまして。","hajimemashite","初次见面"],
+      ["W1/W2 Communication","よろしくおねがいします。","yoroshiku onegaishimasu","请多关照"],
+      ["W1 Communication","でんわばんごうはなんばんですか。","denwa bangoo wa nanban desu ka","电话号码是多少？"],
+      ["W1 Communication","いま、なんじですか。","ima, nanji desu ka","现在几点？"],
+      ["W1 Communication","さんじです。","sanji desu","三点。"],
+      ["W1 Communication","なんさいですか。","nansai desu ka","几岁？"],
+      ["W2 Script","わたしはがくせいです。","watashi wa gakusee desu","我是学生。"],
+      ["W2 Script","にほんごですか。","nihongo desu ka","是日语吗？"],
+      ["W2 Script","ともだちのでんわです。","tomodachi no denwa desu","是朋友的电话。"],
+      ["W2 Script","きむらたけしです。","kimura takeshi desu","我是木村武。"],
+      ["W2 Script","にほんじんです。","nihonjin desu","是日本人。"],
+      ["W2 Script","にほんじんですか。","nihonjin desu ka","是日本人吗？"],
+      ["W2 Script","はい、にほんじんです。","hai, nihonjin desu","是的，是日本人。"],
+      ["W2 Script","ごごよじです。","gogo yoji desu","下午四点。"],
+      ["W2 Communication","たけしさんはがくせいですか。","takeshi san wa gakusee desu ka","武是学生吗？"],
+      ["W2 Communication","はい、そうです。","hai, soo desu","是的，没错。"],
+      ["W2 Communication","いいえ、がくせいです。","iie, gakusee desu","不，是学生。"],
+      ["W2 Communication","たけしさんはなんねんせいですか。","takeshi san wa nannensee desu ka","武是几年级学生？"],
+      ["W2 Communication","よねんせいです。","yonensee desu","是四年级学生。"],
+      ["W2 Communication","せんこうはなんですか。","senkoo wa nan desu ka","你的专业是什么？"],
+      ["W2 Communication","れきしです。","rekishi desu","是历史。"],
+      ["W2 Communication","わたしはさんねんせいです。","watashi wa sannensee desu","我是三年级学生。"],
+      ["W2 Communication","そうですか。せんこうはなんですか。","soo desu ka. senkoo wa nan desu ka","是吗？你的专业是什么？"],
+      ["W2 Communication","けいざいです。","keezai desu","是经济学。"],
+      ["W3 Script","がくせいですか。","gakusee desu ka","是学生吗？"],
+      ["W3 Script","これはいくらですか。","kore wa ikura desu ka","这个多少钱？"],
+      ["W3 Script","このとけいはいくらですか。","kono tokee wa ikura desu ka","这块表多少钱？"],
+      ["W3 Script","どのとけいですか。","dono tokee desu ka","是哪块表？"],
+      ["W3 Script","ぎんこうはどこですか。","ginkoo wa doko desu ka","银行在哪里？"],
+      ["W3 Script","あそこです。","asoko desu","在那里。"],
+      ["W3 Script","だれのかさですか。","dare no kasa desu ka","是谁的伞？"],
+      ["W3 Script","たけしさんのかさです。","takeshi san no kasa desu","是武的伞。"],
+      ["W3 Script","としょかんはどこですか。","toshokan wa doko desu ka","图书馆在哪里？"],
+      ["W3 Script","このかさはいくらですか。","kono kasa wa ikura desu ka","这把伞多少钱？"],
+      ["W3 Script","これはだれのほんですか。","kore wa dare no hon desu ka","这是谁的书？"],
+      ["W3 Script","それはせんせいのほんですよ。","sore wa sensee no hon desu yo","那是老师的书。"],
+      ["W3 Communication","とけいはいくらですか。","tokee wa ikura desu ka","手表多少钱？"],
+      ["W3 Communication","はっぴゃくえんです。","happyaku en desu","八百日元。"],
+      ["W4 Script","わたしのでんわじゃありません。","watashi no denwa ja arimasen","不是我的电话。"],
+      ["W4 Script","このほんはせんえんですね。","kono hon wa sen en desu ne","这本书是一千日元，对吧？"],
+      ["W4 Script","せんこうはれきしですね。","senkoo wa rekishi desu ne","你的专业是历史，对吧？"],
+      ["W4 Script","それ、なんですか。","sore, nan desu ka","那个是什么？"],
+      ["W4 Script","これですか。","kore desu ka","是这个吗？"],
+      ["W4 Script","さかなですよ。","sakana desu yo","是鱼哦。"],
+      ["W4 Script","ちゅうごくごですね。","chuugokugo desu ne","是中文，对吧？"],
+      ["W4 Script","ちゅうごくごじゃないです。","chuugokugo ja nai desu","不是中文。"],
+      ["W4 Script","にほんごですよ。","nihongo desu yo","是日语哦。"],
+      ["W4 Script","とうきょうは、いまごじですね。","tookyoo wa, ima goji desu ne","东京现在是五点，对吧？"],
+      ["W4 Script","いいえ、ごじじゃないです。","iie, goji ja nai desu","不，不是五点。"],
+      ["W4 Script","よじですよ。","yoji desu yo","是四点哦。"],
+      ["W4 Script","すみません。ゆうびんきょくはどこですか。","sumimasen. yuubinkyoku wa doko desu ka","请问，邮局在哪里？"],
+      ["W4 Script","せんこうはけいざいですね。","senkoo wa keezai desu ne","你的专业是经济学，对吧？"],
+      ["W4 Script","これはにくです。","kore wa niku desu","这是肉。"],
+      ["W4 Script","あれもにくです。","are mo niku desu","那个也是肉。"],
+      ["W4 Script","これはとけいじゃありませんね。","kore wa tokee ja arimasen ne","这不是手表，对吧？"],
+      ["W4 Communication","みちこさんはがくせいですか。","michiko san wa gakusee desu ka","道子是学生吗？"],
+      ["W4 Communication","そうですか。わたしもがくせいです。","soo desu ka. watashi mo gakusee desu","是吗？我也是学生。"],
+      ["W4 Communication","どこのだいがくですか。","doko no daigaku desu ka","是哪所大学？"],
+      ["W4 Communication","あのう、すみません。","anoo, sumimasen","那个，不好意思。"],
+      ["W4 Communication","それはなんですか。","sore wa nan desu ka","那个是什么？"],
+      ["W4 Communication","これははさみです。","kore wa hasami desu","这是剪刀。"],
+      ["W4 Communication","これはなんですか。","kore wa nan desu ka","这个是什么？"],
+      ["W4 Communication","それはとんかつです。","sore wa tonkatsu desu","那是炸猪排。"],
+      ["W4 Communication","さかなですか。","sakana desu ka","是鱼吗？"],
+      ["W4 Communication","いいえ、さかなじゃないです。","iie, sakana ja nai desu","不，不是鱼。"],
+      ["W4 Communication","にくです。","niku desu","是肉。"],
+      ["W4 Communication","それはおすしです。","sore wa osushi desu","那是寿司。"],
+      ["W4 Communication","それはたこやきです。","sore wa takoyaki desu","那是章鱼烧。"],
+      ["W4 Communication","それはなっとうです。","sore wa nattoo desu","那是纳豆。"],
+      ["W4 Communication","おいしいですか。","oishii desu ka","好吃吗？"],
+      ["W4 Communication","はい、おいしいですよ。","hai, oishii desu yo","是的，很好吃哦。"],
+      ["W4 Communication","じゃあ、これをおねがいします。","jaa, kore o onegaishimasu","那么，请给我这个。"]
+    ];
+    sentenceData.forEach(x => items.push({id: items.length + 1, deck:"sentences", source:x[0], kana:x[1], romaji:x[2], meaning:x[3]}));
+
+    const names = {core:"Script 高频", dialogue:"对话与词汇", sentences:"句子听写", numbers:"数字／时间／年龄", supplement:"补全假名"};
+    const basicKana = [..."あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん"];
+    const voicedKana = [..."がぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽ"];
+    let queue = [], index = 0, wrongIds = new Set(), attempted = new Set(), correctIds = new Set(), answerHistory = [];
+    const STORAGE_KEY = "jpns1611-dictation-progress-v1";
+
+    const $ = id => document.getElementById(id);
+    const deckEl = $("deck"), weekEl = $("week"), inputEl = $("answerInput"), feedbackEl = $("feedback");
+
+    function filteredItems() {
+      const deck = deckEl.value, week = weekEl.value;
+      return items.filter(x => {
+        const deckOK = deck === "all" || (deck === "wrong" ? wrongIds.has(x.id) : x.deck === deck);
+        const weekOK = week === "all" || x.source.includes(week);
+        return deckOK && weekOK;
+      });
+    }
+    function rebuild(keepKana = "") {
+      queue = filteredItems();
+      const found = keepKana ? queue.findIndex(x => x.kana === keepKana) : -1;
+      index = found >= 0 ? found : 0;
+      render(); renderTable();
+    }
+    function current() { return queue[index]; }
+    function render() {
+      const x = current();
+      if (!x) {
+        document.querySelector(".study").classList.remove("sentence-card");
+        $("meaning").textContent = "当前筛选没有题目";
+        $("source").textContent = "可改选其他题库或 Week";
+        $("romaji").textContent = "";
+        $("progress").textContent = "0 / 0";
+        $("deckTag").textContent = "空题库";
+        inputEl.disabled = true;
+        renderHistory();
+        return;
+      }
+      inputEl.disabled = false;
+      document.querySelector(".study").classList.toggle("sentence-card", x.deck === "sentences");
+      $("meaning").textContent = x.meaning;
+      $("source").textContent = x.source;
+      $("romaji").textContent = $("romajiToggle").checked ? x.romaji : "";
+      $("progress").textContent = `${index + 1} / ${queue.length}`;
+      $("deckTag").textContent = names[x.deck];
+      inputEl.value = "";
+      feedbackEl.textContent = "";
+      feedbackEl.className = "feedback";
+      $("selfGrade").classList.remove("on");
+      clearPad();
+      renderHistory();
+      if (answerMode() === "type") inputEl.focus(); else setTimeout(sizePad, 0);
+    }
+    function normalize(s) {
+      return (s || "").normalize("NFKC").trim().replace(/[\s。、，,.!?！？・]/g, "").replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60));
+    }
+    function check() {
+      const x = current(); if (!x) return;
+      const typed = normalize(inputEl.value), answer = normalize(x.kana);
+      if (!typed) {
+        feedbackEl.className = "feedback bad";
+        feedbackEl.textContent = "先写下你听到的平假名。";
+        return;
+      }
+      if (typed === answer) {
+        correctIds.add(x.id); wrongIds.delete(x.id);
+        feedbackEl.className = "feedback good";
+        feedbackEl.innerHTML = `正确　<span class="answer-kana">${x.kana}</span>`;
+        recordAttempt(x, "correct");
+        if ($("autoNext").checked) setTimeout(next, 650);
+      } else {
+        wrongIds.add(x.id); correctIds.delete(x.id);
+        feedbackEl.className = "feedback bad";
+        feedbackEl.textContent = "还不对，已标为重点复习；可再听一次或看答案。";
+        recordAttempt(x, "review");
+      }
+    }
+    function reveal() {
+      const x = current(); if (!x) return;
+      recordAttempt(x, "done");
+      feedbackEl.className = "feedback";
+      $("selfGrade").classList.add("on");
+      feedbackEl.innerHTML = `答案　<span class="answer-kana">${x.kana}</span><br><small>${x.romaji}</small>`;
+    }
+    function answerMode() { return document.querySelector('input[name="answerMode"]:checked').value; }
+    function setAnswerMode(mode) {
+      const hand = mode === "hand";
+      $("canvasWrap").classList.toggle("on", hand);
+      document.querySelector(".answerbox").classList.toggle("on", !hand);
+      feedbackEl.textContent = "";
+      feedbackEl.className = "feedback";
+      $("selfGrade").classList.remove("on");
+      if (hand) setTimeout(sizePad, 0); else setTimeout(() => inputEl.focus(), 0);
+    }
+    function gradeHand(isCorrect) {
+      const x = current(); if (!x) return;
+      if (isCorrect) {
+        correctIds.add(x.id); wrongIds.delete(x.id);
+        feedbackEl.className = "feedback good";
+        feedbackEl.innerHTML = `已记为正确　<span class="answer-kana">${x.kana}</span>`;
+        recordAttempt(x, "correct");
+        if ($("autoNext").checked) setTimeout(next, 650);
+      } else {
+        wrongIds.add(x.id); correctIds.delete(x.id);
+        feedbackEl.className = "feedback bad";
+        feedbackEl.innerHTML = `已重点记录　<span class="answer-kana">${x.kana}</span>`;
+        recordAttempt(x, "review");
+      }
+      $("selfGrade").classList.remove("on");
+    }
+    function next() { if (!queue.length) return; index = (index + 1) % queue.length; render(); }
+    function prev() { if (!queue.length) return; index = (index - 1 + queue.length) % queue.length; render(); }
+    function speak() {
+      const x = current(); if (!x) return;
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(x.kana);
+      u.lang = "ja-JP"; u.rate = .72; u.pitch = 1;
+      const voices = speechSynthesis.getVoices();
+      const ja = voices.find(v => /^ja(-|_)/i.test(v.lang));
+      if (ja) u.voice = ja;
+      speechSynthesis.speak(u);
+    }
+    function shuffle() {
+      for (let i = queue.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [queue[i], queue[j]] = [queue[j], queue[i]];
+      }
+      index = 0; render();
+    }
+    function resetSession() {
+      if ((attempted.size || answerHistory.length) && !confirm("确定清空已保存的答题、掌握和重点复习记录吗？")) return;
+      wrongIds.clear(); attempted.clear(); correctIds.clear(); answerHistory = [];
+      saveProgress(); updateStats(); rebuild();
+    }
+    function updateStats() {
+      $("doneStat").textContent = attempted.size;
+      $("rightStat").textContent = correctIds.size;
+      $("wrongStat").textContent = wrongIds.size;
+    }
+    function stableKey(item) { return `${item.deck}\u241f${item.source}\u241f${item.kana}`; }
+    function saveProgress() {
+      try {
+        const byId = new Map(items.map(item => [item.id, item]));
+        const keys = set => [...set].map(id => byId.get(id)).filter(Boolean).map(stableKey);
+        const payload = {
+          version: 1,
+          savedAt: new Date().toISOString(),
+          attempted: keys(attempted),
+          correct: keys(correctIds),
+          review: keys(wrongIds),
+          history: answerHistory.map(record => {
+            const item = byId.get(record.id);
+            return item ? {key:stableKey(item), status:record.status} : null;
+          }).filter(Boolean)
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+        if ($("saveState")) $("saveState").textContent = `已自动保存 · ${new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"})}`;
+      } catch (error) {
+        if ($("saveState")) $("saveState").textContent = "当前浏览器阻止了本地保存；请勿使用无痕模式。";
+      }
+    }
+    function loadProgress() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const saved = JSON.parse(raw);
+        const byKey = new Map(items.map(item => [stableKey(item), item]));
+        const ids = list => new Set((Array.isArray(list) ? list : []).map(key => byKey.get(key)).filter(Boolean).map(item => item.id));
+        attempted = ids(saved.attempted);
+        correctIds = ids(saved.correct);
+        wrongIds = ids(saved.review);
+        answerHistory = (Array.isArray(saved.history) ? saved.history : []).map(entry => {
+          const item = byKey.get(entry.key);
+          return item ? {id:item.id, number:0, kana:item.kana, status:["done","correct","review"].includes(entry.status) ? entry.status : "done"} : null;
+        }).filter(Boolean).map((record, i) => ({...record, number:i + 1}));
+        if ($("saveState")) $("saveState").textContent = `已载入上次记录 · ${answerHistory.length} 题`;
+      } catch (error) {
+        localStorage.removeItem(STORAGE_KEY);
+        if ($("saveState")) $("saveState").textContent = "旧记录无法读取，已重新开始。";
+      }
+    }
+    function recordAttempt(item, status = "done") {
+      attempted.add(item.id);
+      let record = answerHistory.find(x => x.id === item.id);
+      const isNew = !record;
+      if (!record) {
+        record = {id:item.id, number:answerHistory.length + 1, kana:item.kana, status};
+        answerHistory.push(record);
+      } else if (status !== "done") {
+        record.status = status;
+      }
+      updateStats();
+      renderHistory();
+      saveProgress();
+      if (isNew) requestAnimationFrame(() => { const box=$("historyScroll"); box.scrollLeft=box.scrollWidth; });
+    }
+    function renderHistory() {
+      const grid = $("historyGrid");
+      if (!answerHistory.length) {
+        grid.innerHTML = '<div class="history-empty">完成一道题后，这里会出现“第 1 题”。每列最多排列 15 行，需要复习的题会醒目标红。</div>';
+        $("historyCount").textContent = "0 题";
+        return;
+      }
+      const active = current();
+      grid.innerHTML = answerHistory.map(record => `<button class="history-item ${record.status} ${active && active.id === record.id ? "current" : ""}" data-id="${record.id}" title="返回第 ${record.number} 题：${record.kana}">
+        <i class="dot"></i><span class="history-label"><b>第${record.number}题</b><span>${record.kana}</span></span>
+      </button>`).join("");
+      $("historyCount").textContent = `${answerHistory.length} 题 · ${wrongIds.size} 需复习`;
+    }
+    function jumpToHistory(id) {
+      let target = queue.findIndex(x => x.id === id);
+      if (target < 0) {
+        deckEl.value = "all"; weekEl.value = "all";
+        queue = filteredItems(); renderTable();
+        target = queue.findIndex(x => x.id === id);
+      }
+      if (target >= 0) { index = target; render(); }
+    }
+    function renderTable() {
+      const q = normalize($("search").value).toLowerCase();
+      const show = $("showAnswers").checked;
+      const rows = filteredItems().filter(x => !q || normalize(`${x.source}${x.meaning}${x.romaji}${x.kana}`).toLowerCase().includes(q));
+      $("rows").innerHTML = rows.map((x,i) => `<tr>
+        <td>${i+1}</td><td>${x.source}</td><td>${x.meaning}</td><td>${x.romaji}</td>
+        <td class="kana ${show ? "" : "hidden-answer"}" title="点击查看">${x.kana}</td></tr>`).join("");
+    }
+    function exportCSV() {
+      const esc = s => `"${String(s).replaceAll('"','""')}"`;
+      const data = filteredItems();
+      const csv = "\ufeff" + [["编号","题库","来源","中文提示","Romaji","平假名"], ...data.map((x,i)=>[i+1,names[x.deck],x.source,x.meaning,x.romaji,x.kana])].map(r=>r.map(esc).join(",")).join("\r\n");
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([csv], {type:"text/csv;charset=utf-8"}));
+      a.download = "JPNS1611_平假名听写清单.csv"; a.click(); URL.revokeObjectURL(a.href);
+    }
+    function coverage(chars) {
+      const body = items.map(x=>x.kana).join("");
+      return {covered: chars.filter(k=>body.includes(k)), missing: chars.filter(k=>!body.includes(k))};
+    }
+
+    // Drawing pad (self-check by revealing the answer).
+    const canvas = $("pad"), ctx = canvas.getContext("2d"); let drawing = false;
+    function sizePad() {
+      const rect = canvas.getBoundingClientRect(), ratio = Math.max(1, devicePixelRatio || 1);
+      canvas.width = Math.round(rect.width * ratio); canvas.height = Math.round(rect.height * ratio);
+      ctx.setTransform(ratio,0,0,ratio,0,0); ctx.lineWidth = 5; ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.strokeStyle = "#15263b";
+    }
+    function point(e) { const r=canvas.getBoundingClientRect(); return [e.clientX-r.left,e.clientY-r.top]; }
+    canvas.addEventListener("pointerdown", e => { drawing=true; canvas.setPointerCapture(e.pointerId); const [x,y]=point(e); ctx.beginPath(); ctx.moveTo(x,y); });
+    canvas.addEventListener("pointermove", e => { if(!drawing)return; const [x,y]=point(e); ctx.lineTo(x,y); ctx.stroke(); });
+    canvas.addEventListener("pointerup", ()=>drawing=false); canvas.addEventListener("pointercancel", ()=>drawing=false);
+    function clearPad() { ctx.clearRect(0,0,canvas.width,canvas.height); }
+
+    deckEl.addEventListener("change", () => rebuild()); weekEl.addEventListener("change", () => rebuild());
+    $("romajiToggle").addEventListener("change", render);
+    document.querySelectorAll('input[name="answerMode"]').forEach(el => el.addEventListener("change", e => setAnswerMode(e.target.value)));
+    $("listenBtn").addEventListener("click", speak); $("checkBtn").addEventListener("click", check);
+    $("revealBtn").addEventListener("click", reveal); $("clearBtn").addEventListener("click", ()=>{inputEl.value="";feedbackEl.textContent="";inputEl.focus();});
+    $("prevBtn").addEventListener("click", prev); $("nextBtn").addEventListener("click", next);
+    $("shuffleBtn").addEventListener("click", shuffle); $("resetBtn").addEventListener("click", resetSession);
+    $("clearPad").addEventListener("click", ()=>{clearPad(); feedbackEl.textContent=""; $("selfGrade").classList.remove("on");});
+    $("handRevealBtn").addEventListener("click", reveal);
+    $("selfRightBtn").addEventListener("click", ()=>gradeHand(true));
+    $("selfWrongBtn").addEventListener("click", ()=>gradeHand(false));
+    inputEl.addEventListener("keydown", e => { if(e.key === "Enter") check(); });
+    $("search").addEventListener("input", renderTable); $("showAnswers").addEventListener("change", renderTable);
+    $("rows").addEventListener("click", e => { const td=e.target.closest("td.kana"); if(td) td.classList.toggle("hidden-answer"); });
+    $("historyGrid").addEventListener("click", e => { const button=e.target.closest(".history-item"); if(button) jumpToHistory(Number(button.dataset.id)); });
+    $("csvBtn").addEventListener("click", exportCSV); $("printBtn").addEventListener("click", ()=>window.print());
+    window.addEventListener("resize", ()=>{if(answerMode() === "hand") sizePad();});
+
+    const b = coverage(basicKana), v = coverage(voicedKana);
+    $("countBadge").textContent = `${items.length} 道（${new Set(items.map(x=>x.kana)).size} 个不同答案）`;
+    $("basicBadge").textContent = `基础 46 音：${b.covered.length}/46${b.missing.length ? "，缺 " + b.missing.join("、") : "，已全覆盖"}`;
+    $("voicedBadge").textContent = `浊音／半浊音：${v.covered.length}/${voicedKana.length}${v.missing.length ? "，缺 " + v.missing.join("、") : "，已全覆盖"}`;
+    loadProgress(); setAnswerMode("hand"); sizePad(); updateStats(); rebuild();
+  </script>
+</body>
+</html>
