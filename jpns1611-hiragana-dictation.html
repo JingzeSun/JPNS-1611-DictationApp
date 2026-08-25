@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JPNS1611 平假名听写练习</title>
+  <title>JPNS1611 Hiragana Dictation Practice</title>
   <style>
     :root {
       --ink: #132238;
@@ -839,7 +839,7 @@
       const csv = "\ufeff" + [["编号","题库","来源","中文提示","Romaji","平假名"], ...data.map((x,i)=>[i+1,names[x.deck],x.source,x.meaning,x.romaji,x.kana])].map(r=>r.map(esc).join(",")).join("\r\n");
       const a = document.createElement("a");
       a.href = URL.createObjectURL(new Blob([csv], {type:"text/csv;charset=utf-8"}));
-      a.download = "JPNS1611_平假名听写清单.csv"; a.click(); URL.revokeObjectURL(a.href);
+      a.download = "jpns1611-hiragana-dictation-data.csv"; a.click(); URL.revokeObjectURL(a.href);
     }
     function coverage(chars) {
       const body = items.map(x=>x.kana).join("");

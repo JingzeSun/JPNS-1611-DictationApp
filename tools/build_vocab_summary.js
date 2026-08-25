@@ -83,7 +83,7 @@ const html = `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JPNS1611 平假名字词与句子总表</title>
+  <title>JPNS1611 Hiragana Vocabulary and Sentence Study Guide</title>
   <style>
     @page { size: A4; margin: 13mm 12mm 15mm; }
     :root { --navy:#12365b; --blue:#236ba6; --pale:#eaf2f8; --gold:#e9ad29; --ink:#142335; --muted:#647184; --line:#d9e1e8; }

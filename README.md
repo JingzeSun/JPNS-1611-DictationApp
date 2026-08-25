@@ -4,7 +4,7 @@
 
 ## 使用
 
-直接打开 [`JPNS1611_平假名听写练习.html`](./JPNS1611_平假名听写练习.html)，不需要安装服务器或依赖。
+直接打开 [`jpns1611-hiragana-dictation.html`](./jpns1611-hiragana-dictation.html)，不需要安装服务器或依赖。
 
 - 默认使用鼠标／触控笔手写，可切换为键盘输入。
 - 浏览器日语语音负责朗读题目。
@@ -19,10 +19,10 @@
 ## 文件
 
 - `index.html`：GitHub Pages 入口。
-- `JPNS1611_平假名听写练习.html`：单文件练习应用。
-- `JPNS1611_平假名听写清单.csv`：完整数据清单。
-- `JPNS1611_平假名字词总表.html`：适合浏览和重新打印的总表。
-- `JPNS1611_平假名字词总表.pdf`：A4 复习总表。
+- `jpns1611-hiragana-dictation.html`：单文件练习应用。
+- `jpns1611-hiragana-dictation-data.csv`：完整数据清单。
+- `jpns1611-hiragana-study-guide.html`：适合浏览和重新打印的总表。
+- `jpns1611-hiragana-study-guide.pdf`：A4 复习总表。
 - `tools/`：数据校验、CSV 和 PDF 总表生成脚本。
 
 原始课程 slides 与本地 Poppler 二进制文件不会提交到仓库。
