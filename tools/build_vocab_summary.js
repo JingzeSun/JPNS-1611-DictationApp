@@ -21,29 +21,41 @@ const groups = [
     key: 'core',
     no: '01',
     title: 'Script 高频词',
-    subtitle: 'Slides 中明确出现的 Hiragana reading / writing practice 与复习词。建议优先掌握。'
+    subtitle: 'Tutorial slides 中明确出现的读写练习与复习词，建议优先掌握。'
   },
   {
     key: 'dialogue',
     no: '02',
     title: '对话与课内词汇',
-    subtitle: 'Communication slides、Lesson 1–2 对话、购物及点餐表达。'
+    subtitle: 'Communication slides、Lesson 1–2 对话、购物与点餐表达。'
   },
   {
     key: 'sentences',
     no: '03',
-    title: '句子听写',
-    subtitle: '从问候、自我介绍、时间、购物与点餐对话中整理的完整句型。'
+    title: 'Tutorial 句子听写',
+    subtitle: '问候、自我介绍、时间、购物与点餐对话中的完整句子。'
+  },
+  {
+    key: 'katakana',
+    no: '04',
+    title: '片假名 ア–ト',
+    subtitle: '老师指定范围：ア行、カ行、サ行、タ行，共 20 个基础片假名。'
+  },
+  {
+    key: 'grammar',
+    no: '05',
+    title: 'Lecture 核心句式',
+    subtitle: '根据 W1–W4 Grammar lecture slides 整理的可直接听写例句。'
   },
   {
     key: 'numbers',
-    no: '04',
+    no: '06',
     title: '数字、时间与年龄',
     subtitle: '包含 0–100、百位、千位、时间和年龄中的特殊读法。'
   },
   {
     key: 'supplement',
-    no: '05',
+    no: '07',
     title: '假名覆盖补充词',
     subtitle: '用常见词补齐 slides 词表未覆盖的基础假名、浊音与半浊音。'
   }
@@ -78,12 +90,14 @@ function renderGroup(group) {
 }
 
 const uniqueCount = new Set(items.map(item => item.kana)).size;
+const katakanaCount = items.filter(item => item.deck === 'katakana').length;
+const grammarCount = items.filter(item => item.deck === 'grammar').length;
 const html = `<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JPNS1611 Hiragana Vocabulary and Sentence Study Guide</title>
+  <title>JPNS1611 Kana and Grammar Study Guide</title>
   <style>
     @page { size: A4; margin: 13mm 12mm 15mm; }
     :root { --navy:#12365b; --blue:#236ba6; --pale:#eaf2f8; --gold:#e9ad29; --ink:#142335; --muted:#647184; --line:#d9e1e8; }
@@ -98,7 +112,7 @@ const html = `<!doctype html>
     h1 { margin:0; max-width:145mm; color:var(--navy); font-size:34pt; line-height:1.08; letter-spacing:.01em; }
     .jp-title { margin:5mm 0 0; color:var(--blue); font:700 20pt/1.3 "Yu Mincho","Yu Gothic",sans-serif; letter-spacing:.09em; }
     .intro { width:130mm; margin-top:13mm; color:var(--muted); font-size:11pt; line-height:1.85; }
-    .stats { display:grid; grid-template-columns:repeat(3,1fr); width:150mm; margin-top:17mm; border:1px solid rgba(18,54,91,.14); border-radius:5mm; overflow:hidden; background:rgba(255,255,255,.72); }
+    .stats { display:grid; grid-template-columns:repeat(4,1fr); width:150mm; margin-top:17mm; border:1px solid rgba(18,54,91,.14); border-radius:5mm; overflow:hidden; background:rgba(255,255,255,.72); }
     .stat { padding:7mm 6mm; border-right:1px solid rgba(18,54,91,.12); }
     .stat:last-child { border-right:0; }
     .stat strong { display:block; color:var(--navy); font-size:24pt; line-height:1; }
@@ -114,6 +128,8 @@ const html = `<!doctype html>
     .chapter-count small { display:block; font-size:7pt; font-weight:600; color:#d9e8f3; }
     .dialogue .chapter-head { background:#1a6075; }
     .sentences .chapter-head { background:#704a68; }
+    .katakana .chapter-head { background:#8a4d32; }
+    .grammar .chapter-head { background:#3f5f49; }
     .numbers .chapter-head { background:#61512b; }
     .supplement .chapter-head { background:#44566c; }
     .entries { columns:2; column-gap:8mm; column-rule:1px solid #e6ebef; }
@@ -125,10 +141,12 @@ const html = `<!doctype html>
     .entry.long .wordline { display:block; }
     .entry.long .kana { display:block; font-size:14pt; white-space:nowrap; letter-spacing:.01em; }
     .entry.long .romaji { display:block; margin-top:.8mm; font-size:7.5pt; }
-    .sentences .entry { min-height:28mm; }
-    .sentences .entry .wordline { display:block; }
-    .sentences .entry .kana { display:block; font-size:12.5pt; white-space:normal; line-height:1.45; }
-    .sentences .entry .romaji { display:block; margin-top:.8mm; font-size:7.2pt; line-height:1.35; }
+    .sentences .entry, .grammar .entry { min-height:28mm; }
+    .sentences .entry .wordline, .grammar .entry .wordline { display:block; }
+    .sentences .entry .kana, .grammar .entry .kana { display:block; font-size:12.5pt; white-space:normal; line-height:1.45; }
+    .sentences .entry .romaji, .grammar .entry .romaji { display:block; margin-top:.8mm; font-size:7.2pt; line-height:1.35; }
+    .katakana .kana { font-size:25pt; }
+    .katakana .entry { min-height:27mm; }
     .meaning { margin-top:1mm; font-size:8.7pt; line-height:1.4; }
     .source { margin-top:1mm; color:#8591a0; font-size:6.8pt; letter-spacing:.02em; }
     @media screen {
@@ -145,15 +163,16 @@ const html = `<!doctype html>
   <section class="cover">
     <div class="course">JPNS1611 · JAPANESE 1 · WEEK 1–4</div>
     <div class="rule"></div>
-    <h1>平假名字词与句子总表</h1>
-    <div class="jp-title">ひらがな・ことば・ぶん</div>
-    <p class="intro">根据当前文件夹中的 Week 1–4 Script 与 Communication tutorial slides 整理。按课程用途分为高频读写词、对话词汇、句子听写、数字表达及假名覆盖补充词，便于集中复习和查阅。</p>
+    <h1>Kana &amp; Grammar<br>Study Guide</h1>
+    <div class="jp-title">かな・文法・聞き取り</div>
+    <p class="intro">根据 Week 1–4 Script、Communication tutorial slides 与 Grammar lecture slides 整理。内容包括平假名词汇、完整句子、老师指定的片假名 ア–ト，以及 Lecture 核心句式。</p>
     <div class="stats">
       <div class="stat"><strong>${items.length}</strong><span>学习条目</span></div>
-      <div class="stat"><strong>${uniqueCount}</strong><span>不同平假名答案</span></div>
-      <div class="stat"><strong>46 / 46</strong><span>基础平假名覆盖</span></div>
+      <div class="stat"><strong>${uniqueCount}</strong><span>不同答案</span></div>
+      <div class="stat"><strong>${katakanaCount} / 20</strong><span>片假名 ア–ト</span></div>
+      <div class="stat"><strong>${grammarCount}</strong><span>Lecture 句式</span></div>
     </div>
-    <div class="guide"><b>阅读说明：</b>每个条目依次列出平假名、课程式罗马字、中文释义和 slides 来源。长音罗马字沿用课程常见写法，如 <i>oo / ee / uu</i>。片假名专用外来词没有强行改写成平假名。</div>
+    <div class="guide"><b>阅读说明：</b>每个条目依次列出日语答案、课程式罗马字、中文释义和 slides 来源。长音罗马字沿用课程常见写法，如 <i>oo / ee / uu</i>；片假名练习须注意字形与平假名的区别。</div>
   </section>
   ${groups.map(renderGroup).join('')}
 </body>

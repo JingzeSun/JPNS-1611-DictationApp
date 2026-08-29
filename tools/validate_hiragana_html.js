@@ -18,23 +18,44 @@ const items = sandbox.result;
 
 const basic = [...'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん'];
 const voiced = [...'がぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽ'];
-const body = items.map(x => x.kana).join('');
-const missingBasic = basic.filter(x => !body.includes(x));
-const missingVoiced = voiced.filter(x => !body.includes(x));
-const deckCounts = Object.fromEntries(['core','dialogue','sentences','numbers','supplement'].map(deck => [deck, items.filter(x => x.deck === deck).length]));
-const duplicates = items.reduce((m, x) => m.set(x.kana, (m.get(x.kana) || 0) + 1), new Map());
+const expectedKatakana = [...'アイウエオカキクケコサシスセソタチツテト'];
+const body = items.map(item => item.kana).join('');
+const katakanaAnswers = items.filter(item => item.deck === 'katakana').map(item => item.kana);
+const missingBasic = basic.filter(char => !body.includes(char));
+const missingVoiced = voiced.filter(char => !body.includes(char));
+const missingKatakana = expectedKatakana.filter(char => !katakanaAnswers.includes(char));
+const extraKatakana = katakanaAnswers.filter(char => !expectedKatakana.includes(char));
+const deckOrder = ['core', 'dialogue', 'sentences', 'katakana', 'grammar', 'numbers', 'supplement'];
+const deckCounts = Object.fromEntries(deckOrder.map(deck => [deck, items.filter(item => item.deck === deck).length]));
+const duplicates = items.reduce((map, item) => map.set(item.kana, (map.get(item.kana) || 0) + 1), new Map());
 const duplicateAnswers = [...duplicates].filter(([, count]) => count > 1).length;
+const badGrammarAnswers = items
+  .filter(item => item.deck === 'grammar' && /(^|[^A-Za-z])[NXY]([^A-Za-z]|$)/.test(item.kana))
+  .map(item => item.kana);
+const ids = items.map(item => item.id);
+const sequentialIds = ids.every((id, index) => id === index + 1);
 
-console.log(JSON.stringify({
+const report = {
   syntax: 'ok',
   total: items.length,
-  uniqueAnswers: new Set(items.map(x => x.kana)).size,
+  uniqueAnswers: new Set(items.map(item => item.kana)).size,
   duplicateAnswers,
   deckCounts,
   basicCoverage: `${basic.length - missingBasic.length}/${basic.length}`,
   missingBasic,
   voicedCoverage: `${voiced.length - missingVoiced.length}/${voiced.length}`,
   missingVoiced,
+  katakanaCoverage: `${expectedKatakana.length - missingKatakana.length}/${expectedKatakana.length}`,
+  missingKatakana,
+  extraKatakana,
+  grammarAnswersAreWritable: badGrammarAnswers.length === 0,
+  badGrammarAnswers,
+  sequentialIds,
   hasSmallTsu: body.includes('っ'),
-  hasSmallY: ['ゃ','ゅ','ょ'].every(x => body.includes(x))
-}, null, 2));
+  hasSmallY: ['ゃ', 'ゅ', 'ょ'].every(char => body.includes(char))
+};
+
+console.log(JSON.stringify(report, null, 2));
+if (missingBasic.length || missingVoiced.length || missingKatakana.length || extraKatakana.length || badGrammarAnswers.length || !sequentialIds) {
+  process.exitCode = 1;
+}
