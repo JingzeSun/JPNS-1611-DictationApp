@@ -38,8 +38,8 @@ const groups = [
   {
     key: 'katakana',
     no: '04',
-    title: '片假名单词 A–TO',
-    subtitle: '20 个完整单词，覆盖老师指定的 A–TO 范围，并练习长音与促音。'
+    title: 'W4 片假名单词',
+    subtitle: 'W4 Script 四组正式练习词 30 个，加上 8 个常见补充词；包含浊音、长音、促音及ト之后的字符。'
   },
   {
     key: 'grammar',
@@ -165,7 +165,7 @@ const html = `<!doctype html>
     <div class="rule"></div>
     <h1>Kana &amp; Grammar<br>Study Guide</h1>
     <div class="jp-title">かな・文法・聞き取り</div>
-    <p class="intro">根据 Week 1–4 Script、Communication tutorial slides 与 Grammar lecture slides 整理。内容包括平假名词汇、完整句子、覆盖 A–TO 范围的片假名单词，以及 Lecture 核心句式。</p>
+    <p class="intro">根据 Week 1–4 Script、Communication tutorial slides 与 Grammar lecture slides 整理。内容包括平假名词汇、完整句子、W4 Script 的完整片假名练习词表，以及 Lecture 核心句式。</p>
     <div class="stats">
       <div class="stat"><strong>${items.length}</strong><span>学习条目</span></div>
       <div class="stat"><strong>${uniqueCount}</strong><span>不同答案</span></div>

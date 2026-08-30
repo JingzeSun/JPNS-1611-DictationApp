@@ -18,7 +18,7 @@ const deckNames = {
   core: 'Script 高频',
   dialogue: '对话与课内词汇',
   sentences: '句子听写',
-  katakana: '片假名单词 A–TO',
+  katakana: 'W4 片假名单词',
   grammar: 'Lecture 核心句式',
   numbers: '数字、时间与年龄',
   supplement: '补全假名的常见词'

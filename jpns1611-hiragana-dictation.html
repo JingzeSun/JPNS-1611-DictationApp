@@ -147,7 +147,7 @@
   <header class="wrap">
     <div class="eyebrow">JPNS1611 · WEEK 1–4 TUTORIAL + LECTURE SLIDES</div>
     <h1>日语假名与句式听写练习</h1>
-    <p class="lead">点“听发音”，在输入框里打假名或句式，或切换到手写板用鼠标/触控笔写。可分开练平假名词汇、A–TO 范围的片假名单词，以及 Week 1–4 讲座出现的核心句式。</p>
+    <p class="lead">点“听发音”，在输入框里打假名或句式，或切换到手写板用鼠标/触控笔写。可分开练平假名词汇、W4 Script 的完整片假名单词，以及 Week 1–4 讲座出现的核心句式。</p>
     <div class="badges">
       <span class="badge" id="countBadge">正在统计…</span>
       <span class="badge" id="basicBadge">基础假名覆盖检查中…</span>
@@ -166,7 +166,7 @@
           <option value="core">Script 高频（建议先刷）</option>
           <option value="dialogue">对话与课内词汇</option>
           <option value="sentences">句子听写</option>
-          <option value="katakana">片假名单词 A–TO</option>
+          <option value="katakana">W4 片假名单词</option>
           <option value="grammar">讲座核心句式</option>
           <option value="numbers">数字、时间与年龄</option>
           <option value="supplement">补全假名的常见词</option>
@@ -279,7 +279,7 @@
       </div>
     </section>
   </main>
-  <footer class="wrap">资料范围：W1–W4 Script、Communication tutorial slides 与 Grammar lecture slides。片假名单词覆盖老师指定的 A–TO 范围。</footer>
+  <footer class="wrap">资料范围：W1–W4 Script、Communication tutorial slides 与 Grammar lecture slides。片假名题库包含 W4 Script 的完整练习词表，并保留常见补充词。</footer>
 
   <script>
     const items = [
@@ -612,26 +612,44 @@
     sentenceData.forEach(x => items.push({id: items.length + 1, deck:"sentences", source:x[0], kana:x[1], romaji:x[2], meaning:x[3]}));
 
     const katakanaData = [
-      ["W4 Script · Reading Practice","タイ","tai","泰国"],
-      ["W4 Script · Reading Practice","ケイト","keito","Kate（人名）"],
-      ["W4 Script · Reading Practice","セス","sesu","Seth（人名）"],
+      ["W4 Script · Reading Practice 2","アンナ","anna","Anna（人名）"],
+      ["W4 Script · Reading Practice 2","タイ","tai","泰国"],
+      ["W4 Script · Reading Practice 2","イアン","ian","Ian（人名）"],
+      ["W4 Script · Reading Practice 2","スイス","suisu","瑞士"],
+      ["W4 Script · Reading Practice 2","ケイト","keito","Kate（人名）"],
+      ["W4 Script · Reading Practice 2","セス","sesu","Seth（人名）"],
+      ["W4 Script · Reading Practice 3","アジア","ajia","亚洲"],
+      ["W4 Script · Reading Practice 3","インド","indo","印度"],
+      ["W4 Script · Reading Practice 3","ドイツ","doitsu","德国"],
+      ["W4 Script · Reading Practice 3","シカゴ","shikago","芝加哥"],
+      ["W4 Script · Reading Practice 3","ダンス","dansu","舞蹈"],
+      ["W4 Script · Reading Practice 3","クイズ","kuizu","问答游戏"],
+      ["W4 Script · Reading Practice 3","ピザ","piza","披萨"],
+      ["W4 Script · Reading Practice 3","パイ","pai","派；馅饼"],
+      ["W4 Script · Reading Practice 3","パソコン","pasokon","个人电脑"],
       ["W4 Script · Long Vowels","スキ","suki","喜欢；短音练习"],
       ["W4 Script · Long Vowels","スキー","sukii","滑雪；长音练习"],
       ["W4 Script · Long Vowels","ケーキ","keeki","蛋糕"],
+      ["W4 Script · Long Vowels","チーズ","chiizu","奶酪"],
       ["W4 Script · Long Vowels","ステーキ","suteeki","牛排"],
+      ["W4 Script · Long Vowels","ソーセージ","sooseeji","香肠"],
       ["W4 Script · Long Vowels","トースト","toosuto","吐司"],
       ["W4 Script · Small Tsu","カツ","katsu","炸肉排；普通 tsu"],
       ["W4 Script · Small Tsu","カット","katto","剪切；促音练习"],
       ["W4 Script · Small Tsu","スコット","sukotto","Scott（人名）"],
+      ["W4 Script · Small Tsu","ザック","zakku","Zach（人名）"],
+      ["W4 Script · Small Tsu","テッド","teddo","Ted（人名）"],
+      ["W4 Script · Small Tsu","クッキー","kukkii","曲奇饼"],
       ["W4 Script · Small Tsu","キットカット","kittokatto","KitKat 巧克力"],
-      ["补充 · A–TO 常见词","アート","aato","艺术"],
-      ["补充 · A–TO 常见词","ウエスト","uesuto","腰围；西部"],
-      ["补充 · A–TO 常见词","エコ","eko","环保；节能"],
-      ["补充 · A–TO 常见词","オート","ooto","自动"],
-      ["补充 · A–TO 常见词","サーカス","saakasu","马戏团"],
-      ["补充 · A–TO 常见词","タクシー","takushii","出租车"],
-      ["补充 · A–TO 常见词","ソース","soosu","酱汁"],
-      ["补充 · A–TO 常见词","チーク","chiiku","腮红；脸颊"]
+      ["W4 Script · Small Tsu","サンドイッチ","sandoicchi","三明治"],
+      ["补充 · 常见片假名词","アート","aato","艺术"],
+      ["补充 · 常见片假名词","ウエスト","uesuto","腰围；西部"],
+      ["补充 · 常见片假名词","エコ","eko","环保；节能"],
+      ["补充 · 常见片假名词","オート","ooto","自动"],
+      ["补充 · 常见片假名词","サーカス","saakasu","马戏团"],
+      ["补充 · 常见片假名词","タクシー","takushii","出租车"],
+      ["补充 · 常见片假名词","ソース","soosu","酱汁"],
+      ["补充 · 常见片假名词","チーク","chiiku","腮红；脸颊"]
     ];
     katakanaData.forEach(x => items.push({id: items.length + 1, deck:"katakana", source:x[0], kana:x[1], romaji:x[2], meaning:x[3]}));
 
@@ -671,7 +689,7 @@
     ];
     grammarData.forEach(x => items.push({id: items.length + 1, deck:"grammar", source:x[0], kana:x[1], romaji:x[2], meaning:x[3]}));
 
-    const names = {core:"Script 高频", dialogue:"对话与词汇", sentences:"句子听写", katakana:"片假名单词 A–TO", grammar:"讲座核心句式", numbers:"数字／时间／年龄", supplement:"补全假名"};
+    const names = {core:"Script 高频", dialogue:"对话与词汇", sentences:"句子听写", katakana:"W4 片假名单词", grammar:"讲座核心句式", numbers:"数字／时间／年龄", supplement:"补全假名"};
     const basicKana = [..."あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん"];
     const voicedKana = [..."がぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽ"];
     const katakanaKana = [..."アイウエオカキクケコサシスセソタチツテト"];
@@ -947,7 +965,7 @@
     $("countBadge").textContent = `${items.length} 道（${new Set(items.map(x=>x.kana)).size} 个不同答案）`;
     $("basicBadge").textContent = `基础 46 音：${b.covered.length}/46${b.missing.length ? "，缺 " + b.missing.join("、") : "，已全覆盖"}`;
     $("voicedBadge").textContent = `浊音／半浊音：${v.covered.length}/${voicedKana.length}${v.missing.length ? "，缺 " + v.missing.join("、") : "，已全覆盖"}`;
-    $("katakanaBadge").textContent = `片假名 A–TO：${k.covered.length}/${katakanaKana.length}${k.missing.length ? "，缺 " + k.missing.join("、") : "，已全覆盖"} · ${items.filter(x=>x.deck === "katakana").length} 词`;
+    $("katakanaBadge").textContent = `W4 片假名：${items.filter(x=>x.deck === "katakana").length} 词 · A–TO 覆盖 ${k.covered.length}/${katakanaKana.length}`;
     loadProgress(); setAnswerMode("hand"); sizePad(); updateStats(); rebuild();
   </script>
 </body>
