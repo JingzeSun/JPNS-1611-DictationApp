@@ -38,8 +38,8 @@ const groups = [
   {
     key: 'katakana',
     no: '04',
-    title: '片假名 ア–ト',
-    subtitle: '老师指定范围：ア行、カ行、サ行、タ行，共 20 个基础片假名。'
+    title: '片假名单词 A–TO',
+    subtitle: '20 个完整单词，覆盖老师指定的 A–TO 范围，并练习长音与促音。'
   },
   {
     key: 'grammar',
@@ -165,11 +165,11 @@ const html = `<!doctype html>
     <div class="rule"></div>
     <h1>Kana &amp; Grammar<br>Study Guide</h1>
     <div class="jp-title">かな・文法・聞き取り</div>
-    <p class="intro">根据 Week 1–4 Script、Communication tutorial slides 与 Grammar lecture slides 整理。内容包括平假名词汇、完整句子、老师指定的片假名 ア–ト，以及 Lecture 核心句式。</p>
+    <p class="intro">根据 Week 1–4 Script、Communication tutorial slides 与 Grammar lecture slides 整理。内容包括平假名词汇、完整句子、覆盖 A–TO 范围的片假名单词，以及 Lecture 核心句式。</p>
     <div class="stats">
       <div class="stat"><strong>${items.length}</strong><span>学习条目</span></div>
       <div class="stat"><strong>${uniqueCount}</strong><span>不同答案</span></div>
-      <div class="stat"><strong>${katakanaCount} / 20</strong><span>片假名 ア–ト</span></div>
+      <div class="stat"><strong>${katakanaCount}</strong><span>片假名单词</span></div>
       <div class="stat"><strong>${grammarCount}</strong><span>Lecture 句式</span></div>
     </div>
     <div class="guide"><b>阅读说明：</b>每个条目依次列出日语答案、课程式罗马字、中文释义和 slides 来源。长音罗马字沿用课程常见写法，如 <i>oo / ee / uu</i>；片假名练习须注意字形与平假名的区别。</div>

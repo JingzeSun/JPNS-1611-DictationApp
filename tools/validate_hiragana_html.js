@@ -20,11 +20,18 @@ const basic = [...'あいうえおかきくけこさしすせそたちつてと�
 const voiced = [...'がぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽ'];
 const expectedKatakana = [...'アイウエオカキクケコサシスセソタチツテト'];
 const body = items.map(item => item.kana).join('');
-const katakanaAnswers = items.filter(item => item.deck === 'katakana').map(item => item.kana);
+const katakanaItems = items.filter(item => item.deck === 'katakana');
+const katakanaAnswers = katakanaItems.map(item => item.kana);
+const katakanaBody = katakanaAnswers.join('');
 const missingBasic = basic.filter(char => !body.includes(char));
 const missingVoiced = voiced.filter(char => !body.includes(char));
-const missingKatakana = expectedKatakana.filter(char => !katakanaAnswers.includes(char));
-const extraKatakana = katakanaAnswers.filter(char => !expectedKatakana.includes(char));
+const missingKatakana = expectedKatakana.filter(char => !katakanaBody.includes(char));
+const allowedKatakana = new Set([...expectedKatakana, 'ッ', 'ー']);
+const unexpectedKatakana = [...new Set([...katakanaBody].filter(char => /[ァ-ヶー]/.test(char) && !allowedKatakana.has(char)))];
+const singleCharacterKatakana = katakanaAnswers.filter(answer => /^[ァ-ヶ]$/.test(answer));
+const promptKanaLeaks = items
+  .filter(item => /[ぁ-ゖァ-ヿ]/.test(item.meaning))
+  .map(item => ({id: item.id, deck: item.deck, meaning: item.meaning}));
 const deckOrder = ['core', 'dialogue', 'sentences', 'katakana', 'grammar', 'numbers', 'supplement'];
 const deckCounts = Object.fromEntries(deckOrder.map(deck => [deck, items.filter(item => item.deck === deck).length]));
 const duplicates = items.reduce((map, item) => map.set(item.kana, (map.get(item.kana) || 0) + 1), new Map());
@@ -45,9 +52,13 @@ const report = {
   missingBasic,
   voicedCoverage: `${voiced.length - missingVoiced.length}/${voiced.length}`,
   missingVoiced,
+  katakanaWordCount: katakanaItems.length,
   katakanaCoverage: `${expectedKatakana.length - missingKatakana.length}/${expectedKatakana.length}`,
   missingKatakana,
-  extraKatakana,
+  unexpectedKatakana,
+  singleCharacterKatakana,
+  promptKanaLeakCount: promptKanaLeaks.length,
+  promptKanaLeaks,
   grammarAnswersAreWritable: badGrammarAnswers.length === 0,
   badGrammarAnswers,
   sequentialIds,
@@ -56,6 +67,15 @@ const report = {
 };
 
 console.log(JSON.stringify(report, null, 2));
-if (missingBasic.length || missingVoiced.length || missingKatakana.length || extraKatakana.length || badGrammarAnswers.length || !sequentialIds) {
+if (
+  missingBasic.length ||
+  missingVoiced.length ||
+  missingKatakana.length ||
+  unexpectedKatakana.length ||
+  singleCharacterKatakana.length ||
+  promptKanaLeaks.length ||
+  badGrammarAnswers.length ||
+  !sequentialIds
+) {
   process.exitCode = 1;
 }
